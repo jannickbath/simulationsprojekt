@@ -32,5 +32,19 @@
     text-align: center;
     font-size: 32px; }
 
+.target {
+  width: fit-content; }
+  .target .icon img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain; }
+  .target p {
+    font-size: 32px;
+    text-align: center; }
+
+.header {
+  display: flex;
+  column-gap: 50px; }
+
 .container {
   padding: 25px 40px; }
