@@ -1,0 +1,48 @@
+.textbox {
+    flex: 1;
+    height: 35px;
+    padding: 10px;
+    background-color: lightblue;
+
+    .input-div {
+        font-size: 30px;
+    }
+
+    .previous-text {
+        color: red;
+        
+        b {
+            color: black;
+            font-weight: normal;
+            background-color: darkred;
+        }
+    }
+
+    &:focus-within {
+        .previous-text {
+            position: relative;
+
+            &::after {
+                content: "";
+                width: 3px;
+                height: 100%;
+                background-color: red;
+                position: absolute;
+                right: 0;
+                animation: blink 1.25s ease-out infinite; 
+            }
+        }
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

@@ -42,9 +42,42 @@
     font-size: 32px;
     text-align: center; }
 
+.textbox {
+  flex: 1;
+  height: 35px;
+  padding: 10px;
+  background-color: lightblue; }
+  .textbox .input-div {
+    font-size: 30px; }
+  .textbox .previous-text {
+    color: red; }
+    .textbox .previous-text b {
+      color: black;
+      font-weight: normal;
+      background-color: darkred; }
+  .textbox:focus-within .previous-text {
+    position: relative; }
+    .textbox:focus-within .previous-text::after {
+      content: "";
+      width: 3px;
+      height: 100%;
+      background-color: red;
+      position: absolute;
+      right: 0;
+      animation: blink 1.25s ease-out infinite; }
+
+@keyframes blink {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 .header {
   display: flex;
-  column-gap: 50px; }
+  column-gap: 50px;
+  margin-bottom: 150px; }
 
 .container {
   padding: 25px 40px; }
