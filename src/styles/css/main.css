@@ -1,0 +1,36 @@
+.tracks {
+  height: 50px;
+  background-color: red; }
+
+.track {
+  display: grid; }
+  .track .top,
+  .track .bottom {
+    height: 70px;
+    background-color: grey; }
+  .track .stripe {
+    width: 150px;
+    height: 15px;
+    background-color: white; }
+  .track .lines {
+    display: flex;
+    padding: 0 2rem;
+    column-gap: 90px;
+    background-color: grey; }
+
+.powerUpView {
+  width: 180px;
+  display: grid;
+  row-gap: 15px; }
+  .powerUpView .item {
+    display: grid;
+    place-content: center;
+    width: 180px;
+    height: 180px;
+    background-color: #C7C1C1; }
+  .powerUpView p {
+    text-align: center;
+    font-size: 32px; }
+
+.container {
+  padding: 25px 40px; }
