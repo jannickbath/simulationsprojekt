@@ -1,5 +1,6 @@
 .track {
     display: grid;
+    position: relative;
 
     .top,
     .bottom {
@@ -18,5 +19,14 @@
         padding: 0 2rem;
         column-gap: 90px;
         background-color: grey;
+    }
+
+    .car {
+        position: absolute;
+
+        img {
+            width: 80%;
+            max-height: 100%;
+        }
     }
 }

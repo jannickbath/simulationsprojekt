@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
-const Track = () => {
+const Track = ({children}) => {
+  const trackRef = useRef(null);
+  const [stripeAmount, setStripeAmount] = useState(1);
+
+
+  useEffect(() => {
+    if (trackRef.current) {
+      const trackWidth = trackRef.current.offsetWidth;
+      const calculatedStripeAmount = Math.floor(trackWidth / 230);
+      setStripeAmount(calculatedStripeAmount)
+    }
+  }, []);
+  
   return (
-    <div className="track">
+    <div className="track" ref={trackRef}>
         <div className="top"></div>
         <div className="lines">
-            <div className="stripe"></div>
-            <div className="stripe"></div>
-            <div className="stripe"></div>
+            {[...Array(stripeAmount)].map(() => <div className="stripe"></div>)}
         </div>
         <div className="bottom"></div>
+        {children}
     </div>
   )
 }
