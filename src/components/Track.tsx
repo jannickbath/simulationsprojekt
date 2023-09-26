@@ -1,28 +1,29 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, ReactNode } from 'react';
 
-const Track = ({children}) => {
-  const trackRef = useRef(null);
-  const [stripeAmount, setStripeAmount] = useState(1);
+const Track: React.FC<{children: ReactNode}> = ({ children }) => {
+    const trackRef = useRef<HTMLDivElement>(null);
+    const [stripeAmount, setStripeAmount] = useState(1);
 
+    useEffect(() => {
+        if (trackRef.current) {
+            const trackWidth = trackRef.current.offsetWidth;
+            const calculatedStripeAmount = Math.floor(trackWidth / 230);
+            setStripeAmount(calculatedStripeAmount);
+        }
+    }, []);
 
-  useEffect(() => {
-    if (trackRef.current) {
-      const trackWidth = trackRef.current.offsetWidth;
-      const calculatedStripeAmount = Math.floor(trackWidth / 230);
-      setStripeAmount(calculatedStripeAmount)
-    }
-  }, []);
-  
-  return (
-    <div className="track" ref={trackRef}>
-        <div className="top"></div>
-        <div className="lines">
-            {[...Array(stripeAmount)].map(() => <div className="stripe"></div>)}
+    return (
+        <div className="track" ref={trackRef}>
+            <div className="top"></div>
+            <div className="lines">
+                {[...Array(stripeAmount)].map(() => (
+                    <div className="stripe"></div>
+                ))}
+            </div>
+            <div className="bottom"></div>
+            {children}
         </div>
-        <div className="bottom"></div>
-        {children}
-    </div>
-  )
-}
+    );
+};
 
-export default Track
+export default Track;

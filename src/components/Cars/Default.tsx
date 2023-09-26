@@ -1,7 +1,6 @@
-import React from 'react'
 import car_png from "../../assets/car_default.png";
 
-const Default = (props) => {
+const Default = (props: CarProps) => {
   const progress = props.progress + "px";
   
   return (

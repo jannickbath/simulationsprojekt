@@ -1,0 +1,3 @@
+type CarProps = {
+    progress: `${number}`
+}

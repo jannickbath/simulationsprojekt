@@ -1,16 +1,20 @@
-import Track from "./Track"
-import Default_car from "./Cars/Default";
+import Track from './Track';
+import Default_car from './Cars/Default';
 
 const Tracks = () => {
-  return (
-    <div className="tracks">
-      <Track>
-        <Default_car progress="10"/>
-      </Track>
-      <Track />
-      <Track />
-    </div>
-  )
-}
+    return (
+        <div className="tracks">
+            <Track>
+                <Default_car progress="10" />
+            </Track>
+            <Track>
+                <Default_car progress="10" />
+            </Track>
+            <Track>
+                <Default_car progress="10" />
+            </Track>
+        </div>
+    );
+};
 
-export default Tracks
+export default Tracks;
