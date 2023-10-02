@@ -1,6 +1,8 @@
+@import "reset-defaults";
 @import "tracks";
 @import "track";
 @import "./header/header";
+@import "car";
 
 .container {
     padding: 25px 40px;

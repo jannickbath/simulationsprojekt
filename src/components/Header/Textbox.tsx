@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateProgress } from "../Redux/cars";
 
 type letterArray = [
   {
@@ -8,8 +10,10 @@ type letterArray = [
 ]
 
 const Textbox = () => {
-  const [text, setText] = useState("Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta laborum atque odio inventore.");
+  const [text, setText] = useState("Lorem ipsum dolor. Sit dolor amet blah blub.");
   const [prevArray, setPrevArray] = useState([{}] as letterArray);
+  const initialTextRef = useRef(text);
+  const dispatch = useDispatch();
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
@@ -33,6 +37,28 @@ const Textbox = () => {
     }
 
     setText(chars.join(""));
+    
+    // Update progress
+    const prevArrayWords = countWords(letterArrayToSentence(prevArray)) - 1;
+    const textWords = countWords(initialTextRef.current);
+    dispatch(updateProgress(calculatePercentage(prevArrayWords, textWords)))
+  }
+
+  function letterArrayToSentence(letterArray: letterArray): string {
+    let sentence = "";
+    letterArray.forEach(letter => {
+      sentence += letter.value ?? "";
+    });
+
+    return sentence;
+  }
+
+  function countWords(sentence: string): number {
+    return sentence.split(" ").length;
+  }
+
+  function calculatePercentage(piece: number, total: number): number {
+    return (piece / total) * 100;
   }
 
   return (
