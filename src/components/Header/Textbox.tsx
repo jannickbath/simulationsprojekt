@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useBoundStore } from "../Hooks/bookStore";
 
 type letterArray = [
   {
@@ -11,10 +12,16 @@ const Textbox = () => {
   const [text, setText] = useState("Lorem ipsum dolor. Sit dolor amet blah blub.");
   const [prevArray, setPrevArray] = useState([{}] as letterArray);
   const initialTextRef = useRef(text);
+  const players = useBoundStore(state => state.players);
+  const cars = useBoundStore(state => state.cars);
+  const addPlayer = useBoundStore(state => state.addPlayer);
+  const getTotalAmount = useBoundStore(state => state.getTotalAmount)
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
     const chars = text.split("");
+    console.log(getTotalAmount());
+    addPlayer("gustaf", "müller");
 
     if (chars[0] == pressedKey) {
       prevArray.push({
