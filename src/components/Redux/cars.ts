@@ -3,16 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 export const carSlice = createSlice({
     name: "cars",
     initialState: [
-        {own: true, progress: "0"}
+        {id: 1, progress: "0"}
     ],
     reducers: {
         addCar: (state) => {
-            state.push({own: false, progress: "10"});
+            state.push({id: state.length + 1, progress: "10"});
         },
         updateProgress: (state, action) => {
-            const myCar = state.find(car => car.own);
+            const myCar = action.payload.id;
+            
             if (myCar) {
-                myCar.progress = `${action.payload}`;
+                myCar.progress = `${action.payload.progress}`;
             }
         }
     }
