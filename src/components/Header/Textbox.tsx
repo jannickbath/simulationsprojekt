@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useBoundStore } from "../Hooks/bookStore";
+import { useBoundStore } from "../Zustand/useBoundStore";
 
 type letterArray = [
   {
