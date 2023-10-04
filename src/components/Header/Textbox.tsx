@@ -21,7 +21,8 @@ const Textbox = () => {
     const pressedKey = event.key;
     const chars = text.split("");
     console.log(getTotalAmount());
-    addPlayer("gustaf", "müller");
+    const player = addPlayer(1);
+    console.log(player);
 
     if (chars[0] == pressedKey) {
       prevArray.push({

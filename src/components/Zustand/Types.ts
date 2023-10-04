@@ -23,7 +23,7 @@ export type CarSlice = {
 
 export type PlayerSlice = {
   players: Array<Player>;
-  addPlayer: (name: string, lastname: string) => void;
+  addPlayer: (carId: number) => Player;
 };
 
 export type Slices = PlayerSlice & CarSlice;
