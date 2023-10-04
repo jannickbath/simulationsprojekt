@@ -1,6 +1,6 @@
 import { Player, PlayerSlice, State, StateCreatorFn } from '../Types';
 
-export const playerSlice: StateCreatorFn<PlayerSlice> = (set) => ({
+export const playerSlice: StateCreatorFn<PlayerSlice> = (set, get) => ({
   players: [
     { id: 1, human: true, speed: 10, carId: 1 },
     { id: 2, human: false, speed: 25, carId: 2 },
@@ -8,7 +8,7 @@ export const playerSlice: StateCreatorFn<PlayerSlice> = (set) => ({
   addPlayer: (carId) => {
     let player = {} as Player;
     if (carId === undefined) {
-      // Create new Car
+      carId = get().addCar().id;
     }
     set((state: State) => {
       player = {

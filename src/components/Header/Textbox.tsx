@@ -21,7 +21,7 @@ const Textbox = () => {
     const pressedKey = event.key;
     const chars = text.split("");
     console.log(getTotalAmount());
-    const player = addPlayer(1);
+    const player = addPlayer();
     console.log(player);
 
     if (chars[0] == pressedKey) {

@@ -11,19 +11,18 @@ export type Player = {
   human: boolean;
   speed: number;
   carId: number;
-  name?: string;
 };
 
 // Slices
 export type CarSlice = {
   cars: Array<Car>;
-  addCar: () => void;
+  addCar: () => Car;
   getTotalAmount: () => number;
 };
 
 export type PlayerSlice = {
   players: Array<Player>;
-  addPlayer: (carId: number) => Player;
+  addPlayer: (carId?: number) => Player;
 };
 
 export type Slices = PlayerSlice & CarSlice;
