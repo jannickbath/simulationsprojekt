@@ -1,9 +1,13 @@
 import Track from './Track';
 import Default_car from './Cars/Default';
-import { useSelector } from 'react-redux';
 
 const Tracks = () => {
-    const cars = useSelector((state: any) => state.cars as Array<Car>);
+    const cars: Array<Car> = [
+        {
+            own: true,
+            progress: "10"
+        }
+    ];
 
     return (
         <div className="tracks">
