@@ -15,7 +15,7 @@ export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
     return car;
   },
   getHumanCar: () => {
-    const humanPlayer = get().players.find(player => player.human);
+    const humanPlayer = get().getHumanPlayer();
     const cars = get().cars;
     if (humanPlayer) {
       return cars.find(car => car.id === humanPlayer.carId);

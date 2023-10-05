@@ -12,8 +12,11 @@ const Textbox = () => {
   const [text, setText] = useState("Lorem ipsum dolor. Sit dolor amet blah blub.");
   const [prevArray, setPrevArray] = useState([{}] as letterArray);
   const initialTextRef = useRef(text);
+  const startSeconds = useRef(0);
   const updateProgress = useBoundStore(state => state.updateProgress);
+  const updateSpeed = useBoundStore(state => state.updateSpeed);
   const humanCar = useBoundStore(state => state.getHumanCar)();
+  const humanPlayer = useBoundStore(state => state.getHumanPlayer)();
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
@@ -40,6 +43,12 @@ const Textbox = () => {
     
     // Update progress
     const prevArrayWords = countWords(letterArrayToSentence(prevArray)) - 1;
+    const wpm = calculateWordsPerMinute(prevArrayWords, startSeconds.current);
+
+    if (humanPlayer) {
+      updateSpeed(humanPlayer.id, wpm);
+    }
+    
     const textWords = countWords(initialTextRef.current);
     const calculatedPercentage = calculatePercentage(prevArrayWords, textWords);
 
@@ -65,8 +74,19 @@ const Textbox = () => {
     return (piece / total) * 100;
   }
 
+  function calculateWordsPerMinute(typedWords: number, startSeconds: number): number {
+    const currentTimeInSeconds = Math.floor(Date.now() / 1000);
+    const elapsedMinutes = (currentTimeInSeconds - startSeconds) / 60;
+    return parseInt((typedWords / elapsedMinutes).toFixed(0));
+  }
+
+  function startRace() {
+    startSeconds.current = Math.floor(Date.now() / 1000)
+  }
+
   return (
     <div className="textbox">
+      <button onClick={startRace} style={{width: "100px", background: "red"}}>Start Race</button>
       <div className="input-div" tabIndex={0} onKeyDown={e => keyHandler(e)}>
         <span className="previous-text">
           {prevArray.map(obj => {
@@ -79,6 +99,7 @@ const Textbox = () => {
         </span>
         {text}
       </div>
+      {humanPlayer?.speed}
     </div>
   )
 }

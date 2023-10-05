@@ -24,6 +24,8 @@ export type CarSlice = {
 export type PlayerSlice = {
   players: Array<Player>;
   addPlayer: (carId?: number) => Player;
+  updateSpeed: (id: number, newSpeed: number) => void;
+  getHumanPlayer: () => Player | undefined;
 };
 
 export type Slices = PlayerSlice & CarSlice;
