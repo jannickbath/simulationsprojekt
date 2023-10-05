@@ -13,6 +13,12 @@ export type Player = {
   carId: number;
 };
 
+export type Game = {
+  started: boolean,
+  scene: string,
+  playerLimit: number
+};
+
 // Slices
 export type CarSlice = {
   cars: Array<Car>;
@@ -28,12 +34,20 @@ export type PlayerSlice = {
   getHumanPlayer: () => Player | undefined;
 };
 
-export type Slices = PlayerSlice & CarSlice;
+export type GameSlice = {
+  game: Game;
+  start: () => void;
+  stop: () => void;
+  getStatus: () => boolean;
+};
+
+export type Slices = PlayerSlice & CarSlice & GameSlice;
 
 // Zustand
 export type State = {
   players: Array<Player>;
   cars: Array<Car>;
+  game: Game
 };
 
 export type StateCreatorFn<T> = StateCreator<Slices, [], [], T>;

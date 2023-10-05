@@ -12,7 +12,6 @@ const Textbox = () => {
   const [text, setText] = useState(
     'Lorem ipsum dolor. Sit dolor amet blah blub.'
   );
-  const [gameStarted, setGameStarted] = useState(false);
   const [intervalStarted, setIntervalStarted] = useState(false);
   const initialTextRef = useRef(text);
   const startSeconds = useRef(0);
@@ -24,6 +23,8 @@ const Textbox = () => {
   const players = useBoundStore((state) => state.players);
   const cars = useBoundStore((state) => state.cars);
   const npcs = players.filter((player) => !player.human);
+  const startGame = useBoundStore(state => state.start);
+  const gameStatus = useBoundStore(state => state.getStatus)();
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
@@ -57,7 +58,7 @@ const Textbox = () => {
   });
 
   useEffect(() => {
-    if (intervalStarted || !gameStarted) return;
+    if (intervalStarted || !gameStatus) return;
     setIntervalStarted(true);
 
     setInterval(() => {
@@ -130,7 +131,7 @@ const Textbox = () => {
   }
 
   function startRace() {
-    setGameStarted(true);
+    startGame();
     startSeconds.current = Math.floor(Date.now() / 1000);
 
     npcs.forEach((npc) => {
