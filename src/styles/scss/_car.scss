@@ -1,8 +1,8 @@
 .car {
     width: 300px;
     height: 150px;
-
     position: absolute;
+    transition: left 1.5s linear;
 
     img {
         width: 100%;
