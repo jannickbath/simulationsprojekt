@@ -2,15 +2,14 @@ import { Player, PlayerSlice, State, StateCreatorFn } from '../Types';
 
 export const playerSlice: StateCreatorFn<PlayerSlice> = (set, get) => ({
   players: [
-    { id: 1, human: true, speed: 10, carId: 1 },
-    { id: 2, human: false, speed: 25, carId: 2 },
+    { id: 1, human: true, speed: 10, carId: 1 }
   ],
   addPlayer: (carId) => {
     let player = {} as Player;
-    if (carId === undefined) {
-      carId = get().addCar().id;
-    }
     set((state: State) => {
+      if (carId === undefined) {
+        carId = get().addCar().id;
+      }
       player = {
         id: state.players.length + 1,
         human: false,

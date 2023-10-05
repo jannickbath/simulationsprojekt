@@ -1,9 +1,11 @@
+import { useBoundStore } from "../Zustand/useBoundStore"
 import Barrier from "../items/Barrier"
 
 const PowerUpView = () => {
+  const addPlayer = useBoundStore(store => store.addPlayer);
 
   function handleClick() {
-    // blah
+    addPlayer();
   }
 
   return (

@@ -12,17 +12,12 @@ const Textbox = () => {
   const [text, setText] = useState("Lorem ipsum dolor. Sit dolor amet blah blub.");
   const [prevArray, setPrevArray] = useState([{}] as letterArray);
   const initialTextRef = useRef(text);
-  const players = useBoundStore(state => state.players);
-  const cars = useBoundStore(state => state.cars);
-  const addPlayer = useBoundStore(state => state.addPlayer);
-  const getTotalAmount = useBoundStore(state => state.getTotalAmount)
+  const updateProgress = useBoundStore(state => state.updateProgress);
+  const humanCar = useBoundStore(state => state.getHumanCar)();
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
     const chars = text.split("");
-    console.log(getTotalAmount());
-    const player = addPlayer();
-    console.log(player);
 
     if (chars[0] == pressedKey) {
       prevArray.push({
@@ -44,9 +39,13 @@ const Textbox = () => {
     setText(chars.join(""));
     
     // Update progress
-    // const prevArrayWords = countWords(letterArrayToSentence(prevArray)) - 1;
-    // const textWords = countWords(initialTextRef.current);
-    // dispatch(updateProgress(calculatePercentage(prevArrayWords, textWords)))
+    const prevArrayWords = countWords(letterArrayToSentence(prevArray)) - 1;
+    const textWords = countWords(initialTextRef.current);
+    const calculatedPercentage = calculatePercentage(prevArrayWords, textWords);
+
+    if (humanCar) {
+      updateProgress(humanCar.id, `${calculatedPercentage}`)
+    }
   }
 
   function letterArrayToSentence(letterArray: letterArray): string {

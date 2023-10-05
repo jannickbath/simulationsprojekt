@@ -17,7 +17,8 @@ export type Player = {
 export type CarSlice = {
   cars: Array<Car>;
   addCar: () => Car;
-  getTotalAmount: () => number;
+  getHumanCar: () => Car | undefined;
+  updateProgress: (id: number, progress: `${number}`) => void;
 };
 
 export type PlayerSlice = {
