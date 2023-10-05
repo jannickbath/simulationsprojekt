@@ -16,7 +16,8 @@ export type Player = {
 export type Game = {
   started: boolean,
   scene: string,
-  playerLimit: number
+  playerLimit: number,
+  startSeconds: number
 };
 
 // Slices

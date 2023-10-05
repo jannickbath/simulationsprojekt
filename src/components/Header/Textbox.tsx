@@ -14,7 +14,6 @@ const Textbox = () => {
   );
   const [intervalStarted, setIntervalStarted] = useState(false);
   const initialTextRef = useRef(text);
-  const startSeconds = useRef(0);
   const prevArrayRef = useRef([{}] as letterArray);
   const updateProgress = useBoundStore((state) => state.updateProgress);
   const updateSpeed = useBoundStore((state) => state.updateSpeed);
@@ -25,6 +24,7 @@ const Textbox = () => {
   const npcs = players.filter((player) => !player.human);
   const startGame = useBoundStore(state => state.start);
   const gameStatus = useBoundStore(state => state.getStatus)();
+  const startSeconds = useBoundStore(state => state.game.startSeconds);
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
@@ -50,13 +50,6 @@ const Textbox = () => {
     setText(chars.join(''));
   }
 
-  // Prevent spacebar from scrolling down
-  document.addEventListener('keydown', (event: KeyboardEvent) => {
-    if (event.keyCode == 32) {
-      event.preventDefault();
-    }
-  });
-
   useEffect(() => {
     if (intervalStarted || !gameStatus) return;
     setIntervalStarted(true);
@@ -66,14 +59,14 @@ const Textbox = () => {
       const prevArrayWords = countWords(letterArrayToSentence(prevArrayRef.current)) - 1;
       const wpm = calculateWordsPerMinute(
         prevArrayWords,
-        startSeconds.current
+        startSeconds
       );
 
       if (humanPlayer) {
         updateSpeed(humanPlayer.id, wpm);
       }
 
-      const calculatedPercentage = calculateProgressbyWordsPerMinute(wpm, countWords(initialTextRef.current), startSeconds.current);
+      const calculatedPercentage = calculateProgressbyWordsPerMinute(wpm, countWords(initialTextRef.current), startSeconds);
 
       if (humanCar) {
         updateProgress(humanCar.id, `${calculatedPercentage}`);
@@ -86,7 +79,7 @@ const Textbox = () => {
           const progress = calculateProgressbyWordsPerMinute(
             npc.speed,
             countWords(initialTextRef.current),
-            startSeconds.current
+            startSeconds
           );
           updateProgress(car?.id, `${progress}`);
         }
@@ -130,10 +123,9 @@ const Textbox = () => {
     return Math.min(progress, 100);
   }
 
+  // Just for testing, can be removed since its in Game.tsx
   function startRace() {
     startGame();
-    startSeconds.current = Math.floor(Date.now() / 1000);
-
     npcs.forEach((npc) => {
       const min = 40;
       const max = 100;
