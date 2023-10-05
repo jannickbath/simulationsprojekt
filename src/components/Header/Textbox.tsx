@@ -17,6 +17,9 @@ const Textbox = () => {
   const updateSpeed = useBoundStore(state => state.updateSpeed);
   const humanCar = useBoundStore(state => state.getHumanCar)();
   const humanPlayer = useBoundStore(state => state.getHumanPlayer)();
+  const players = useBoundStore(state => state.players);
+  const cars = useBoundStore(state => state.cars);
+  const npcs = players.filter(player => !player.human);
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
@@ -55,6 +58,15 @@ const Textbox = () => {
     if (humanCar) {
       updateProgress(humanCar.id, `${calculatedPercentage}`)
     }
+
+    // Update npcs
+    npcs.forEach(npc => {
+      const car = cars.find(car => car.id === npc.carId);
+      if (car) {
+        const progress = calculateProgressbyWordsPerMinute(npc.speed, countWords(initialTextRef.current), startSeconds.current);
+        updateProgress(car?.id, `${progress}`);
+      }
+    })
   }
 
   function letterArrayToSentence(letterArray: letterArray): string {
@@ -80,8 +92,22 @@ const Textbox = () => {
     return parseInt((typedWords / elapsedMinutes).toFixed(0));
   }
 
+  function calculateProgressbyWordsPerMinute(wpm: number, totalWords: number, startSeconds: number): number {
+    const secondsTillFinished = (totalWords / wpm) * 60;
+    const currentTimeInSeconds = Math.floor(Date.now() / 1000);
+    const secondsPassed = currentTimeInSeconds - startSeconds;
+    return parseInt(((secondsPassed / secondsTillFinished) * 100).toFixed(2));
+  }
+
   function startRace() {
-    startSeconds.current = Math.floor(Date.now() / 1000)
+    startSeconds.current = Math.floor(Date.now() / 1000);
+
+    npcs.forEach(npc => {
+      const min = 40;
+      const max = 100;
+      const randomWPM = Math.floor(Math.random() * (max - min + 1)) + min;
+      updateSpeed(npc.id, randomWPM);
+    });
   }
 
   return (
