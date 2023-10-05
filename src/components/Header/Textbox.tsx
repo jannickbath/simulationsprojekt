@@ -12,11 +12,11 @@ const Textbox = () => {
   const [text, setText] = useState(
     'Lorem ipsum dolor. Sit dolor amet blah blub.'
   );
-  const [prevArray, setPrevArray] = useState([{}] as letterArray);
   const [gameStarted, setGameStarted] = useState(false);
   const [intervalStarted, setIntervalStarted] = useState(false);
   const initialTextRef = useRef(text);
   const startSeconds = useRef(0);
+  const prevArrayRef = useRef([{}] as letterArray);
   const updateProgress = useBoundStore((state) => state.updateProgress);
   const updateSpeed = useBoundStore((state) => state.updateSpeed);
   const humanCar = useBoundStore((state) => state.getHumanCar)();
@@ -30,20 +30,20 @@ const Textbox = () => {
     const chars = text.split('');
 
     if (chars[0] == pressedKey) {
-      prevArray.push({
+      prevArrayRef.current.push({
         value: chars.shift() ?? '',
         incorrect: false,
       });
     } else if (pressedKey >= 'a' && pressedKey <= 'z') {
-      prevArray.push({
+      prevArrayRef.current.push({
         value: chars.shift() ?? '',
         incorrect: true,
       });
     } else if (pressedKey == 'Backspace') {
-      const toBeRemovedCharacter = prevArray[prevArray.length - 1].value;
-      const newPrevArray = prevArray.slice(0, -1);
+      const toBeRemovedCharacter = prevArrayRef.current[prevArrayRef.current.length - 1].value;
+      const newPrevArray = prevArrayRef.current.slice(0, -1);
       chars.unshift(toBeRemovedCharacter);
-      setPrevArray(newPrevArray);
+      prevArrayRef.current = newPrevArray;
     }
 
     setText(chars.join(''));
@@ -62,7 +62,7 @@ const Textbox = () => {
 
     setInterval(() => {
       // Update progress
-      const prevArrayWords = countWords(letterArrayToSentence(prevArray)) - 1;
+      const prevArrayWords = countWords(letterArrayToSentence(prevArrayRef.current)) - 1;
       const wpm = calculateWordsPerMinute(
         prevArrayWords,
         startSeconds.current
@@ -148,7 +148,7 @@ const Textbox = () => {
       </button>
       <div className="input-div" tabIndex={0} onKeyDown={(e) => keyHandler(e)}>
         <span className="previous-text">
-          {prevArray.map((obj) => {
+          {prevArrayRef.current.map((obj) => {
             if (!obj.incorrect) {
               return <span>{obj.value}</span>;
             } else {
