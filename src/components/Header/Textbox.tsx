@@ -72,11 +72,7 @@ const Textbox = () => {
         updateSpeed(humanPlayer.id, wpm);
       }
 
-      const textWords = countWords(initialTextRef.current);
-      const calculatedPercentage = calculatePercentage(
-        prevArrayWords,
-        textWords
-      );
+      const calculatedPercentage = calculateProgressbyWordsPerMinute(wpm, countWords(initialTextRef.current), startSeconds.current);
 
       if (humanCar) {
         updateProgress(humanCar.id, `${calculatedPercentage}`);
@@ -108,10 +104,6 @@ const Textbox = () => {
 
   function countWords(sentence: string): number {
     return sentence.split(' ').length;
-  }
-
-  function calculatePercentage(piece: number, total: number): number {
-    return (piece / total) * 100;
   }
 
   function calculateWordsPerMinute(
