@@ -7,7 +7,7 @@ import { useBoundStore } from "../Zustand/useBoundStore";
 const Utility = () => {
   const startGame = useStartGame();
   const stopGame = useStopGame();
-  const humanPlayer = useBoundStore(state => state.getHumanPlayer)();
+  const humanPlayer = useBoundStore(state => state.players).find(player => player.human);
   const gameStatus = useBoundStore(state => state.game.started);
   const handleGameToggle = () => gameStatus ? stopGame() : startGame();
 

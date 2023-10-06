@@ -56,6 +56,8 @@ export function useProgressLoop() {
     });
   }
 
+  // Issue: Player wpm is not updating. -> Human player is not moving
+  // Reason: typedText is the initial value inside the interval, since useEffect doesnt care about typedText changing. However if you provide useEffect with the typedText as an "attribute" its going to restart the interval every time typedText changes. 
   useEffect(() => {
     if (mainInterval) clearInterval(mainInterval);
     if (!gameStatus) return;
