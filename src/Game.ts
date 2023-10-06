@@ -16,3 +16,11 @@ export function useStartGame() {
         });
     }
 }
+
+export function useStopGame() {
+    const stopGame = useBoundStore(state => state.stop);
+    
+    return () => {
+        stopGame();
+    }
+}

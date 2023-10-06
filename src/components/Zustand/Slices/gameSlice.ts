@@ -11,7 +11,7 @@ export const gameSlice: StateCreatorFn<GameSlice> = (set, get) => ({
     return { game: { ...state.game, started: true, startSeconds: Math.floor(Date.now() / 1000)} }
   }),
   stop: () => set((state: State) => {
-    return { game: { ...state.game, started: false } }
+    return { game: { ...state.game, started: false , startSeconds: 0} }
   }),
   getStatus: () => get().game.started,
 });

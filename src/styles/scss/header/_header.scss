@@ -1,9 +1,10 @@
 @import "powerUpView";
 @import "target";
 @import "textbox";
+@import "utility";
 
 .header {
     display: flex;
     column-gap: 50px;
-    margin-bottom: 150px;
+    margin-bottom: 60px;
 }

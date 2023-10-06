@@ -102,10 +102,34 @@ textarea {
   100% {
     opacity: 0; } }
 
+.utility {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 25px;
+  font-size: 28px;
+  margin-bottom: 60px; }
+  .utility__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px; }
+  .utility .start-button {
+    background-color: limegreen;
+    border: 2px solid limegreen;
+    padding: 0.75rem 1.25rem;
+    font-size: 18px;
+    border-radius: .25rem;
+    cursor: pointer;
+    transition: all 200ms ease-out; }
+    .utility .start-button.active {
+      background-color: rgba(255, 0, 0, 0.2);
+      border: 2px solid red; }
+
 .header {
   display: flex;
   column-gap: 50px;
-  margin-bottom: 150px; }
+  margin-bottom: 60px; }
 
 .car {
   width: 300px;

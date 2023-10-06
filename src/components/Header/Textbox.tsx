@@ -140,7 +140,6 @@ const Textbox = () => {
         </span>
         {text}
       </div>
-      {humanPlayer?.speed}
     </div>
   );
 };
