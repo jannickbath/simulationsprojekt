@@ -3,16 +3,13 @@ import ReactDOM from 'react-dom/client';
 import Tracks from './components/Tracks';
 import '../src/styles/css/main.css';
 import Header from './components/Header/Header';
-import Game from './Game';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Game>
-      <div className="container">
-        <Header />
-        <Tracks />
-      </div>
-    </Game>
+    <div className="container">
+      <Header />
+      <Tracks />
+    </div>
   </React.StrictMode>
 );
 

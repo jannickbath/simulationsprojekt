@@ -22,7 +22,6 @@ const Textbox = () => {
   const players = useBoundStore((state) => state.players);
   const cars = useBoundStore((state) => state.cars);
   const npcs = players.filter((player) => !player.human);
-  const startGame = useBoundStore(state => state.start);
   const gameStatus = useBoundStore(state => state.getStatus)();
   const startSeconds = useBoundStore(state => state.game.startSeconds);
 
@@ -123,22 +122,8 @@ const Textbox = () => {
     return Math.min(progress, 100);
   }
 
-  // Just for testing, can be removed since its in Game.tsx
-  function startRace() {
-    startGame();
-    npcs.forEach((npc) => {
-      const min = 40;
-      const max = 100;
-      const randomWPM = Math.floor(Math.random() * (max - min + 1)) + min;
-      updateSpeed(npc.id, randomWPM);
-    });
-  }
-
   return (
     <div className="textbox">
-      <button onClick={startRace} style={{ width: '100px', background: 'red' }}>
-        Start Race
-      </button>
       <div className="input-div" tabIndex={0} onKeyDown={(e) => keyHandler(e)}>
         <span className="previous-text">
           {prevArrayRef.current.map((obj) => {
