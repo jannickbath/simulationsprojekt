@@ -5,7 +5,7 @@ import { letterArrayToSentence } from '../../HelperFunctions';
 
 const Textbox = () => {
   const [prevArray, setPrevArray] = useState([{}] as letterArray);
-  const text = useBoundStore(state => state.getRemainingText)();
+  const text = useBoundStore(state => state.text.remainingText);
   const updateText = useBoundStore(state => state.updateRemainingText);
   const updateTypedText = useBoundStore(state => state.updateTypedText);
 

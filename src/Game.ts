@@ -36,7 +36,7 @@ export function useProgressLoop() {
   const players = useBoundStore((state) => state.players);
   const cars = useBoundStore((state) => state.cars);
   const npcs = players.filter((player) => !player.human);
-  const initialText = useBoundStore(state => state.getText)();
+  const initialText = useBoundStore(state => state.text.text);
   const startSeconds = useBoundStore(state => state.game.startSeconds);
   const gameStatus = useBoundStore(state => state.game.started);
   const typedText = useBoundStore(state => state.text.typedText);

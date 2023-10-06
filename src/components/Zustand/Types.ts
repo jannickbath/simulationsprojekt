@@ -38,9 +38,6 @@ export type TextSlice = {
   text: Text;
   updateTypedText: (newText: string) => void;
   updateRemainingText: (newText: string) => void;
-  getTypedText: () => string;
-  getText: () => string;
-  getRemainingText: () => string;
 };
 
 export type PlayerSlice = {
