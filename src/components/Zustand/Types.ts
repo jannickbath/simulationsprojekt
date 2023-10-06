@@ -20,12 +20,27 @@ export type Game = {
   startSeconds: number
 };
 
+export type Text = {
+  text: string,
+  typedText: string,
+  remainingText: string
+};
+
 // Slices
 export type CarSlice = {
   cars: Array<Car>;
   addCar: () => Car;
   getHumanCar: () => Car | undefined;
   updateProgress: (id: number, progress: `${number}`) => void;
+};
+
+export type TextSlice = {
+  text: Text;
+  updateTypedText: (newText: string) => void;
+  updateRemainingText: (newText: string) => void;
+  getTypedText: () => string;
+  getText: () => string;
+  getRemainingText: () => string;
 };
 
 export type PlayerSlice = {
@@ -39,16 +54,16 @@ export type GameSlice = {
   game: Game;
   start: () => void;
   stop: () => void;
-  getStatus: () => boolean;
 };
 
-export type Slices = PlayerSlice & CarSlice & GameSlice;
+export type Slices = PlayerSlice & CarSlice & GameSlice & TextSlice;
 
 // Zustand
 export type State = {
   players: Array<Player>;
   cars: Array<Car>;
-  game: Game
+  game: Game,
+  text: Text
 };
 
 export type StateCreatorFn<T> = StateCreator<Slices, [], [], T>;

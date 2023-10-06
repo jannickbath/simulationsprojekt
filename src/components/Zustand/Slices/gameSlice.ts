@@ -1,6 +1,6 @@
 import { GameSlice, State, StateCreatorFn } from '../Types';
 
-export const gameSlice: StateCreatorFn<GameSlice> = (set, get) => ({
+export const gameSlice: StateCreatorFn<GameSlice> = (set) => ({
   game: {
     started: false,
     scene: "default",
@@ -12,6 +12,5 @@ export const gameSlice: StateCreatorFn<GameSlice> = (set, get) => ({
   }),
   stop: () => set((state: State) => {
     return { game: { ...state.game, started: false , startSeconds: 0} }
-  }),
-  getStatus: () => get().game.started,
+  })
 });
