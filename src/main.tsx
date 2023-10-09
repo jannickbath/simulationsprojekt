@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import Tracks from './components/Tracks';
 import '../src/styles/css/main.css';
 import Header from './components/Header/Header';
 import { useProgressLoop } from './Game';
 import { useBoundStore } from './components/Zustand/useBoundStore';
-import { Player } from './components/Zustand/Types';
 import Winner from './components/Overlay/Winner';
 
 const App = () => {
   useProgressLoop();
   const players = useBoundStore(state => state.players);
   const cars = useBoundStore(state => state.cars);
-  const [winner, setWinner] = useState<null|Player>(null);
+  const winner = useBoundStore(state => state.leaderboard.winner);
+  const setWinner = useBoundStore(state => state.setWinner);
+  const ui = useBoundStore(state => state.ui);
+  const pushUi = useBoundStore(state => state.pushUi);
 
   // Prevent spacebar from scrolling down
   document.addEventListener('keydown', (event: KeyboardEvent) => {
@@ -28,8 +30,8 @@ const App = () => {
     if (winningCar) {
       const winningPlayer = players.find(player => player.carId == winningCar.id)
       if (winningPlayer) {
-        console.log(winningPlayer);
         setWinner(winningPlayer);
+        pushUi(<Winner player={winningPlayer}/>);
       }
     }
   }, [cars, winner])
@@ -39,7 +41,7 @@ const App = () => {
       <div className="container">
         <Header />
         <Tracks />
-        {winner ? <Winner /> : null}
+        {ui.map(popup => popup)}
       </div>
     </React.StrictMode>
   );

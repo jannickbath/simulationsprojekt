@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { StateCreator } from 'zustand';
 
 // Objects
@@ -28,6 +29,12 @@ export type Text = {
   remainingText: string
 };
 
+export type Leaderboard = {
+  winner: Player|null
+}
+
+export type Popup = ReactNode;
+
 export type CarModel = "default" | "brick";
 
 // Slices
@@ -44,6 +51,17 @@ export type TextSlice = {
   updateRemainingText: (newText: string) => void;
 };
 
+export type LeaderboardSlice = {
+  leaderboard: Leaderboard;
+  setWinner: (winner: Player) => void;
+};
+
+export type UiSlice = {
+  ui: Array<Popup>;
+  pushUi: (popup: Popup) => void;
+  clearUi: () => void;
+};
+
 export type PlayerSlice = {
   players: Array<Player>;
   addPlayer: (carId?: number) => Player;
@@ -57,14 +75,16 @@ export type GameSlice = {
   stop: () => void;
 };
 
-export type Slices = PlayerSlice & CarSlice & GameSlice & TextSlice;
+export type Slices = PlayerSlice & CarSlice & GameSlice & TextSlice & LeaderboardSlice & UiSlice;
 
 // Zustand
 export type State = {
   players: Array<Player>;
   cars: Array<Car>;
   game: Game,
-  text: Text
+  text: Text,
+  leaderboard: Leaderboard,
+  ui: Array<Popup>
 };
 
 export type StateCreatorFn<T> = StateCreator<Slices, [], [], T>;

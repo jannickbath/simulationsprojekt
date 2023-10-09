@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useBoundStore } from "../Zustand/useBoundStore";
 
 type PopupProps = {
   children: ReactNode,
@@ -7,9 +8,10 @@ type PopupProps = {
 
 const Popup: React.FC<PopupProps> = (props) => {
   const { children } = props;
+  const clearUi = useBoundStore(state => state.clearUi);
 
   function handleClose() {
-    // unset winner
+    clearUi();
   }
 
   return (
