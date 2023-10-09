@@ -72,7 +72,7 @@ textarea {
 
 .textbox {
   flex: 1;
-  height: 35px;
+  height: fit-content;
   padding: 10px;
   background-color: lightblue; }
   .textbox .input-div {
