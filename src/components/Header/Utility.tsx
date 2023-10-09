@@ -1,15 +1,19 @@
-// Issue: Components doesnt rerender if gameStatus changes.
-// Solution: Directly access the properties, do not use getters.
-
 import { useStartGame, useStopGame } from "../../Game";
 import { useBoundStore } from "../Zustand/useBoundStore";
 
 const Utility = () => {
   const startGame = useStartGame();
   const stopGame = useStopGame();
+  const addPlayer = useBoundStore(state => state.addPlayer);
   const humanPlayer = useBoundStore(state => state.players).find(player => player.human);
   const gameStatus = useBoundStore(state => state.game.started);
   const handleGameToggle = () => gameStatus ? stopGame() : startGame();
+
+  function generateOpponents(): void {
+    for(let i = 0; i < 3; i++) {
+      addPlayer();
+    }
+  }
 
   return (
     <div className="utility">
@@ -17,12 +21,14 @@ const Utility = () => {
           <div className="wpm-display">
             {humanPlayer?.speed}
           </div>
-          <button className={"start-button" + (gameStatus ? " active": "")} onClick={handleGameToggle}>
+          <button className={"start-button btn-default" + (gameStatus ? " active": "")} onClick={handleGameToggle}>
              {gameStatus ? "Stop Race": "Start Race"}
           </button>
         </div>
         -
         <div className="game-status">{gameStatus ? "Running": "Paused"}</div>
+        -
+        <div className="generate-opponents btn-default" onClick={generateOpponents}>Generate Opponents</div>
     </div>
   )
 }
