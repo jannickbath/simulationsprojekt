@@ -24,7 +24,7 @@ const Tracks = () => {
           progress={car.progress}
         />
 
-        if (player.human) {
+        if (car.model === "brick") {
           car_element = <Brick_car
             player_name={player.name}
             own={player.human}

@@ -2,12 +2,12 @@ import { Car, CarSlice, State, StateCreatorFn } from '../Types';
 
 export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
   cars: [
-    { id: 1, progress: '0' }
+    { id: 1, progress: '0', model: "brick"}
   ],
-  addCar: () => {
+  addCar: (model = "default") => {
     let car = {} as Car;
     set((state: State) => {
-      car = { id: state.cars.length + 1, progress: '0' };
+      car = { id: state.cars.length + 1, progress: '0', model: model};
       return {
         cars: [...state.cars, car]
       }

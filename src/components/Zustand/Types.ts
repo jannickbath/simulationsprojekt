@@ -4,6 +4,7 @@ import { StateCreator } from 'zustand';
 export type Car = {
   id: number;
   progress: `${number}`;
+  model: string;
 };
 
 export type Player = {
@@ -27,10 +28,12 @@ export type Text = {
   remainingText: string
 };
 
+export type CarModel = "default" | "brick";
+
 // Slices
 export type CarSlice = {
   cars: Array<Car>;
-  addCar: () => Car;
+  addCar: (model?: CarModel) => Car;
   getHumanCar: () => Car | undefined;
   updateProgress: (id: number, progress: `${number}`) => void;
 };
