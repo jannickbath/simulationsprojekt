@@ -105,4 +105,21 @@
             }
         }
     }
+
+    &.car-brick {
+        width: 410px;
+        
+        .car__body {
+            width: 400px;
+            height: 80px;
+            border-radius: 50px 35px 15px 15px;
+            background-color: rgb(35, 140, 40);
+
+            &__topper {
+                width: 150px;
+                background-color: rgb(35, 140, 40);
+            }
+        }
+    }
 }
+

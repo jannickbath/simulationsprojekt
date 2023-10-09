@@ -216,6 +216,16 @@ textarea {
     .car__body__tires__back {
       right: 60px;
       bottom: -20%; }
+  .car.car-brick {
+    width: 410px; }
+    .car.car-brick .car__body {
+      width: 400px;
+      height: 80px;
+      border-radius: 50px 35px 15px 15px;
+      background-color: #238c28; }
+      .car.car-brick .car__body__topper {
+        width: 150px;
+        background-color: #238c28; }
 
 .container {
   padding: 25px 40px; }
