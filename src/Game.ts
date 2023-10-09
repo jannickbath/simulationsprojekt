@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useBoundStore } from './components/Zustand/useBoundStore';
 import { calculateProgressbyWordsPerMinute, calculateWordsPerMinute, countWords } from './HelperFunctions';
 
@@ -39,8 +39,9 @@ export function useProgressLoop() {
   const initialText = useBoundStore(state => state.text.text);
   const startSeconds = useBoundStore(state => state.game.startSeconds);
   const gameStatus = useBoundStore(state => state.game.started);
-  const typedText = useBoundStore(state => state.text.typedText);
-
+  const typedTextStore = useBoundStore(state => state.text.typedText);
+  const typedTextRef = useRef(typedTextStore);
+  
   function updateNpcCars() {
     // Update npcs
     npcs.forEach((npc) => {
@@ -56,13 +57,13 @@ export function useProgressLoop() {
     });
   }
 
-  // Issue: Player wpm is not updating. -> Human player is not moving
-  // Reason: typedText is the initial value inside the interval, since useEffect doesnt care about typedText changing. However if you provide useEffect with the typedText as an "attribute" its going to restart the interval every time typedText changes. 
   useEffect(() => {
     if (mainInterval) clearInterval(mainInterval);
     if (!gameStatus) return;
 
     const id = setInterval(() => {
+      const typedText = typedTextRef.current;
+
       // Update progress
       const prevArrayWords =
         countWords(typedText) - 1;
@@ -87,4 +88,9 @@ export function useProgressLoop() {
 
     setMainInterval(id);
   }, [gameStatus]);
+
+  // Update the typedTextRef when typedText changes
+  useEffect(() => {
+    typedTextRef.current = typedTextStore;
+  }, [typedTextStore]);
 }
