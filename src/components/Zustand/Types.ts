@@ -11,6 +11,7 @@ export type Player = {
   human: boolean;
   speed: number;
   carId: number;
+  name: string;
 };
 
 export type Game = {

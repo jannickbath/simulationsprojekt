@@ -21,6 +21,7 @@ const Tracks = () => {
         return (
           <Track>
             <Default_car
+              player_name={player.name}
               own={player.human}
               progress={car.progress}
             />

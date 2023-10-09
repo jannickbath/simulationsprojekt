@@ -2,7 +2,7 @@ import { Player, PlayerSlice, State, StateCreatorFn } from '../Types';
 
 export const playerSlice: StateCreatorFn<PlayerSlice> = (set, get) => ({
   players: [
-    { id: 1, human: true, speed: 0, carId: 1 }
+    { id: 1, human: true, speed: 0, carId: 1, name: "You"}
   ],
   addPlayer: (carId) => {
     let player = {} as Player;
@@ -10,11 +10,13 @@ export const playerSlice: StateCreatorFn<PlayerSlice> = (set, get) => ({
       if (carId === undefined) {
         carId = get().addCar().id;
       }
+      const id = state.players.length + 1;
       player = {
-        id: state.players.length + 1,
+        id: id,
         human: false,
         speed: 0,
         carId: carId,
+        name: "Bot " + id
       };
       return { players: [ ...state.players, player ] };
     });
