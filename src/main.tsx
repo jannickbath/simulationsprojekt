@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 import { useProgressLoop } from './Game';
 import { useBoundStore } from './components/Zustand/useBoundStore';
 import { Player } from './components/Zustand/Types';
+import Winner from './components/Overlay/Winner';
 
 const App = () => {
   useProgressLoop();
@@ -19,7 +20,7 @@ const App = () => {
       event.preventDefault();
     }
   });
-  
+
   useEffect(() => {
     if (winner) return;
 
@@ -38,6 +39,7 @@ const App = () => {
       <div className="container">
         <Header />
         <Tracks />
+        {winner ? <Winner /> : null}
       </div>
     </React.StrictMode>
   );

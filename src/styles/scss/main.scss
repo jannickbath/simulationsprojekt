@@ -3,6 +3,11 @@
 @import "track";
 @import "./header/header";
 @import "car";
+@import "./overlay/popup";
+
+html, body {
+    overflow: hidden;
+}
 
 .container {
     padding: 25px 40px;
