@@ -1,9 +1,9 @@
 import { Car, CarSlice, State, StateCreatorFn } from '../Types';
 
+const initialCarState: Array<Car> = [ { id: 1, progress: '0', model: "brick"} ];
+
 export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
-  cars: [
-    { id: 1, progress: '0', model: "brick"}
-  ],
+  cars: initialCarState,
   addCar: (model = "default") => {
     let car = {} as Car;
     set((state: State) => {
@@ -13,6 +13,17 @@ export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
       }
     });
     return car;
+  },
+  removeCar: (id) => {
+    set((state: State) => {
+      const filteredCars = state.cars.filter(car => car.id !== id);
+      return { cars: filteredCars };
+    })
+  },
+  clearCars: () => {
+    set(() => {
+      return { cars: initialCarState };
+    });
   },
   getHumanCar: () => {
     const humanPlayer = get().getHumanPlayer();

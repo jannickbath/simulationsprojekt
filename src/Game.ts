@@ -27,6 +27,18 @@ export function useStopGame() {
   };
 }
 
+export function useRestartGame() {
+  const clearPlayers = useBoundStore(state => state.clearPlayers);
+  const clearCars = useBoundStore(state => state.clearCars);
+  const resetLeaderboard = useBoundStore(state => state.resetLeaderboard);
+
+  return () => {
+    clearPlayers();
+    clearCars();
+    resetLeaderboard();
+  }
+}
+
 export function useProgressLoop() {
   const [mainInterval, setMainInterval] = useState<number>();
   const updateProgress = useBoundStore((state) => state.updateProgress);

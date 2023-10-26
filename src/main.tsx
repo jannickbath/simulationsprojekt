@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Tracks from './components/Tracks';
 import '../src/styles/css/main.css';
 import Header from './components/Header/Header';
-import { useProgressLoop } from './Game';
+import { useProgressLoop, useStopGame } from './Game';
 import { useBoundStore } from './components/Zustand/useBoundStore';
 import Winner from './components/Overlay/Winner';
 
@@ -15,6 +15,7 @@ const App = () => {
   const setWinner = useBoundStore(state => state.setWinner);
   const ui = useBoundStore(state => state.ui);
   const pushUi = useBoundStore(state => state.pushUi);
+  const stopGame = useStopGame();
 
   // Prevent spacebar from scrolling down
   document.addEventListener('keydown', (event: KeyboardEvent) => {
@@ -32,6 +33,7 @@ const App = () => {
       if (winningPlayer) {
         setWinner(winningPlayer);
         pushUi(<Winner player={winningPlayer}/>);
+        stopGame();
       }
     }
   }, [cars, winner])

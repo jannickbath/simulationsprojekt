@@ -41,6 +41,8 @@ export type CarModel = "default" | "brick";
 export type CarSlice = {
   cars: Array<Car>;
   addCar: (model?: CarModel) => Car;
+  removeCar: (id: number) => void;
+  clearCars: () => void;
   getHumanCar: () => Car | undefined;
   updateProgress: (id: number, progress: `${number}`) => void;
 };
@@ -54,6 +56,7 @@ export type TextSlice = {
 export type LeaderboardSlice = {
   leaderboard: Leaderboard;
   setWinner: (winner: Player) => void;
+  resetLeaderboard: () => void;
 };
 
 export type UiSlice = {
@@ -68,6 +71,7 @@ export type PlayerSlice = {
   addPlayer: (carId?: number) => Player;
   updateSpeed: (id: number, newSpeed: number) => void;
   getHumanPlayer: () => Player | undefined;
+  clearPlayers: () => void;
 };
 
 export type GameSlice = {

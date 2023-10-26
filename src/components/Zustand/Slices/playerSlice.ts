@@ -1,9 +1,11 @@
 import { Player, PlayerSlice, State, StateCreatorFn } from '../Types';
 
+const initialPlayerState = [
+  { id: 1, human: true, speed: 0, carId: 1, name: "You"}
+];
+
 export const playerSlice: StateCreatorFn<PlayerSlice> = (set, get) => ({
-  players: [
-    { id: 1, human: true, speed: 0, carId: 1, name: "You"}
-  ],
+  players: initialPlayerState,
   addPlayer: (carId) => {
     let player = {} as Player;
     set((state: State) => {
@@ -21,6 +23,11 @@ export const playerSlice: StateCreatorFn<PlayerSlice> = (set, get) => ({
       return { players: [ ...state.players, player ] };
     });
     return player;
+  },
+  clearPlayers: () => {
+    set(() => {
+      return { players: initialPlayerState };
+    });
   },
   getHumanPlayer: () => get().players.find(player => player.human),
   updateSpeed: (id, newSpeed) => set((state: State) => {
