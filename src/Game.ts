@@ -28,14 +28,22 @@ export function useStopGame() {
 }
 
 export function useRestartGame() {
-  const clearPlayers = useBoundStore(state => state.clearPlayers);
-  const clearCars = useBoundStore(state => state.clearCars);
-  const resetLeaderboard = useBoundStore(state => state.resetLeaderboard);
+  const { clearPlayers, resetLeaderboard, clearCars, updateTypedText, updateRemainingText, updateProgress } = useBoundStore(state => state);
+  const { players, cars } = useBoundStore(state => state);
+  const humanPlayer = players.find(player => player.human);
+  const humanCar = cars.find(cars => cars.id === humanPlayer?.carId);
+  const originalText = useBoundStore(state => state.text.text);
 
   return () => {
     clearPlayers();
     clearCars();
     resetLeaderboard();
+    updateTypedText("");
+    updateRemainingText(originalText);
+    
+    if (humanCar) {
+      updateProgress(humanCar.id, "0");
+    }
   }
 }
 
