@@ -60,6 +60,7 @@ export type UiSlice = {
   ui: Array<Popup>;
   pushUi: (popup: Popup) => void;
   clearUi: () => void;
+  popUi: () => void;
 };
 
 export type PlayerSlice = {
