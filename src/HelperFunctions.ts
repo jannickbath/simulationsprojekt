@@ -9,6 +9,14 @@ export function letterArrayToSentence(letterArray: letterArray): string {
   return sentence;
 }
 
+export function sentenceToLetterArray(sentence: string): letterArray {
+  const letterArray = [{}] as letterArray;
+  for (let i = 0; i < sentence.length; i++) {
+    letterArray.push({ value: sentence[i], incorrect: false });
+  }
+  return letterArray;
+}
+
 export function countWords(sentence: string): number {
   return sentence.split(' ').length;
 }

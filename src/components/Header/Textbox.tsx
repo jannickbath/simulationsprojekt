@@ -1,13 +1,19 @@
-import { useState } from 'react';
-import { letterArray } from '../../Types';
+import { useEffect, useState } from 'react';
 import { useBoundStore } from '../Zustand/useBoundStore';
-import { letterArrayToSentence } from '../../HelperFunctions';
+import { letterArrayToSentence, sentenceToLetterArray } from '../../HelperFunctions';
 
 const Textbox = () => {
-  const [prevArray, setPrevArray] = useState([{}] as letterArray);
   const text = useBoundStore(state => state.text.remainingText);
+  const winner = useBoundStore(state => state.leaderboard.winner);
+  const typedText = useBoundStore(state => state.text.typedText);
+  const [prevArray, setPrevArray] = useState(sentenceToLetterArray(typedText));
   const updateText = useBoundStore(state => state.updateRemainingText);
   const updateTypedText = useBoundStore(state => state.updateTypedText);
+
+  // Updates the prevArray if the winner changes -> e.g. the game is restarted and the winner is cleared
+  useEffect(() => {
+    setPrevArray(sentenceToLetterArray(typedText));
+  },[winner]);
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
