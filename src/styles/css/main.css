@@ -31,7 +31,8 @@ textarea {
 
 .track {
   display: grid;
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
   .track .top,
   .track .bottom {
     height: 70px;
@@ -129,11 +130,11 @@ textarea {
 .header {
   display: flex;
   column-gap: 50px;
-  margin-bottom: 60px; }
+  margin-bottom: 15px; }
 
 .car {
-  width: 360px;
-  height: 150px;
+  width: calc(360px / 1);
+  height: calc(150px / 1);
   position: absolute;
   transition: left 1.5s linear; }
   .car .player-name {
@@ -145,54 +146,54 @@ textarea {
     background-color: skyblue;
     padding: 0.25rem 0.5rem; }
   .car__body {
-    width: 350px;
-    height: 80px;
+    width: calc(350px / 1);
+    height: calc(80px / 1);
     position: absolute;
     left: 5px;
     bottom: 5px;
     background-color: #3A83D3;
-    border-radius: 50px 80px 40px 20px;
+    border-radius: calc(50px / 1) calc(80px / 1) calc(40px / 1) calc(20px / 1);
     border: 5px solid black; }
     .car__body__headlight {
       position: absolute;
-      right: -10px;
+      right: calc(-10px / 1);
       top: 25%;
-      width: 20px;
-      height: 45px;
+      width: calc(20px / 1);
+      height: calc(45px / 1);
       background-color: yellow;
       border: 3px solid black;
-      border-radius: 0 20px 20px 0; }
+      border-radius: 0 calc(20px / 1) calc(20px / 1) 0; }
     .car__body__taillight {
       position: absolute;
-      left: -10px;
+      left: calc(-15px / 1);
       top: 25%;
-      width: 25px;
-      height: 45px;
+      width: calc(25px / 1);
+      height: calc(45px / 1);
       background-color: red;
       border: 3px solid black;
-      border-radius: 15px 0 0 15px; }
+      border-radius: calc(15px / 1) 0 0 calc(15px / 1); }
     .car__body__topper {
       position: absolute;
-      left: 60px;
+      left: calc(60px / 1);
       bottom: 100%;
-      width: 180px;
-      height: 60px;
-      border-radius: 180px 180px 0 0;
+      width: calc(180px / 1);
+      height: calc(60px / 1);
+      border-radius: calc(180px / 1) calc(180px / 1) 0 0;
       background-color: #3A83D3;
       border-top: 5px solid black;
       border-right: 5px solid black;
       border-left: 5px solid black; }
     .car__body__tires__tire {
       position: absolute;
-      width: 70px;
-      height: 70px;
+      width: calc(70px / 1);
+      height: calc(70px / 1);
       border-radius: 50%;
       border: 5px solid black;
       background-color: #4B4B4B; }
       .car__body__tires__tire__inner {
         position: absolute;
-        width: 40px;
-        height: 40px;
+        width: calc(40px / 1);
+        height: calc(40px / 1);
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -202,8 +203,8 @@ textarea {
         .car__body__tires__tire__inner::after {
           content: "";
           position: absolute;
-          width: 15px;
-          height: 15px;
+          width: calc(15px / 1);
+          height: calc(15px / 1);
           left: 50%;
           top: 50%;
           transform: translate(-50%, -50%);
@@ -211,20 +212,20 @@ textarea {
           border: 3px solid black;
           background-color: #4B4B4B; }
     .car__body__tires__front {
-      left: 50px;
+      left: calc(50px / 1);
       bottom: -20%; }
     .car__body__tires__back {
-      right: 60px;
+      right: calc(60px / 1);
       bottom: -20%; }
   .car.car-brick {
-    width: 410px; }
+    width: calc(410px / 1); }
     .car.car-brick .car__body {
-      width: 400px;
-      height: 80px;
-      border-radius: 50px 35px 15px 15px;
+      width: calc(400px / 1);
+      height: calc(80px / 1);
+      border-radius: calc(50px / 1) calc(35px / 1) calc(15px / 1) calc(15px / 1);
       background-color: #238c28; }
       .car.car-brick .car__body__topper {
-        width: 150px;
+        width: calc(150px / 1);
         background-color: #238c28; }
 
 .popup.winner {
@@ -270,6 +271,111 @@ textarea {
     padding: 0.20rem 0.35rem;
     border: 1px solid black;
     cursor: pointer; }
+
+.scene-road .car {
+  width: calc(360px / 1.35);
+  height: calc(150px / 1.35);
+  position: absolute;
+  transition: left 1.5s linear; }
+  .scene-road .car .player-name {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    background-color: skyblue;
+    padding: 0.25rem 0.5rem; }
+  .scene-road .car__body {
+    width: calc(350px / 1.35);
+    height: calc(80px / 1.35);
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    background-color: #3A83D3;
+    border-radius: calc(50px / 1.35) calc(80px / 1.35) calc(40px / 1.35) calc(20px / 1.35);
+    border: 5px solid black; }
+    .scene-road .car__body__headlight {
+      position: absolute;
+      right: calc(-10px / 1.35);
+      top: 25%;
+      width: calc(20px / 1.35);
+      height: calc(45px / 1.35);
+      background-color: yellow;
+      border: 3px solid black;
+      border-radius: 0 calc(20px / 1.35) calc(20px / 1.35) 0; }
+    .scene-road .car__body__taillight {
+      position: absolute;
+      left: calc(-15px / 1.35);
+      top: 25%;
+      width: calc(25px / 1.35);
+      height: calc(45px / 1.35);
+      background-color: red;
+      border: 3px solid black;
+      border-radius: calc(15px / 1.35) 0 0 calc(15px / 1.35); }
+    .scene-road .car__body__topper {
+      position: absolute;
+      left: calc(60px / 1.35);
+      bottom: 100%;
+      width: calc(180px / 1.35);
+      height: calc(60px / 1.35);
+      border-radius: calc(180px / 1.35) calc(180px / 1.35) 0 0;
+      background-color: #3A83D3;
+      border-top: 5px solid black;
+      border-right: 5px solid black;
+      border-left: 5px solid black; }
+    .scene-road .car__body__tires__tire {
+      position: absolute;
+      width: calc(70px / 1.35);
+      height: calc(70px / 1.35);
+      border-radius: 50%;
+      border: 5px solid black;
+      background-color: #4B4B4B; }
+      .scene-road .car__body__tires__tire__inner {
+        position: absolute;
+        width: calc(40px / 1.35);
+        height: calc(40px / 1.35);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        border: 3px solid black;
+        background-color: #9C9C9D; }
+        .scene-road .car__body__tires__tire__inner::after {
+          content: "";
+          position: absolute;
+          width: calc(15px / 1.35);
+          height: calc(15px / 1.35);
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          border: 3px solid black;
+          background-color: #4B4B4B; }
+    .scene-road .car__body__tires__front {
+      left: calc(50px / 1.35);
+      bottom: -20%; }
+    .scene-road .car__body__tires__back {
+      right: calc(60px / 1.35);
+      bottom: -20%; }
+  .scene-road .car.car-brick {
+    width: calc(410px / 1.35); }
+    .scene-road .car.car-brick .car__body {
+      width: calc(400px / 1.35);
+      height: calc(80px / 1.35);
+      border-radius: calc(50px / 1.35) calc(35px / 1.35) calc(15px / 1.35) calc(15px / 1.35);
+      background-color: #238c28; }
+      .scene-road .car.car-brick .car__body__topper {
+        width: calc(150px / 1.35);
+        background-color: #238c28; }
+
+.scene-road .track .top {
+  height: 50px; }
+
+.scene-road .track .bottom {
+  height: 50px; }
+
+.scene-road .track .stripe {
+  height: 10px; }
 
 html, body {
   overflow: hidden; }

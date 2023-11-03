@@ -1,9 +1,11 @@
+@import "mixins";
 @import "reset-defaults";
 @import "tracks";
 @import "track";
 @import "./header/header";
 @import "car";
 @import "./overlay/popup";
+@import "./scenes/scenes";
 
 html, body {
     overflow: hidden;

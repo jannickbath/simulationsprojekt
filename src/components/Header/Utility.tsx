@@ -7,10 +7,15 @@ const Utility = () => {
   const addPlayer = useBoundStore(state => state.addPlayer);
   const humanPlayer = useBoundStore(state => state.players).find(player => player.human);
   const gameStatus = useBoundStore(state => state.game.started);
+  const playerLimit = useBoundStore(state => state.game.playerLimit);
+  const players = useBoundStore(state => state.players);
   const handleGameToggle = () => gameStatus ? stopGame() : startGame();
 
   function generateOpponents(): void {
-    for(let i = 0; i < 3; i++) {
+    if (players.length >= playerLimit) return;
+
+    const botAmount = playerLimit - 1;
+    for(let i = 0; i < botAmount; i++) {
       addPlayer();
     }
   }

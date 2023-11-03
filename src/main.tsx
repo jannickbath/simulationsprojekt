@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import Tracks from './components/Tracks';
 import '../src/styles/css/main.css';
-import Header from './components/Header/Header';
 import { useProgressLoop, useStopGame } from './Game';
 import { useBoundStore } from './components/Zustand/useBoundStore';
 import Winner from './components/Overlay/Winner';
+import Scene from './components/Scenes/Scene';
 
 const App = () => {
   useProgressLoop();
@@ -41,8 +40,7 @@ const App = () => {
   return (
     <React.StrictMode>
       <div className="container">
-        <Header />
-        <Tracks />
+        <Scene type='road' />
         {ui.map(popup => popup)}
       </div>
     </React.StrictMode>

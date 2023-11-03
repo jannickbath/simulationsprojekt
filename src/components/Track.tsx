@@ -7,7 +7,7 @@ const Track: React.FC<{children: ReactNode}> = ({ children }) => {
     useEffect(() => {
         if (trackRef.current) {
             const trackWidth = trackRef.current.offsetWidth;
-            const calculatedStripeAmount = Math.floor(trackWidth / 230);
+            const calculatedStripeAmount = Math.floor(trackWidth / 200);
             setStripeAmount(calculatedStripeAmount);
         }
     }, []);

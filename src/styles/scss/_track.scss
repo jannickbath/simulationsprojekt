@@ -1,6 +1,7 @@
 .track {
     display: grid;
     position: relative;
+    overflow: hidden;
 
     .top,
     .bottom {
