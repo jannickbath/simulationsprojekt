@@ -9,15 +9,12 @@ const Utility = () => {
   const gameStatus = useBoundStore(state => state.game.started);
   const playerLimit = useBoundStore(state => state.game.playerLimit);
   const players = useBoundStore(state => state.players);
+  const generatedOpponents = players.length >= playerLimit;
   const handleGameToggle = () => gameStatus ? stopGame() : startGame();
 
-  function generateOpponents(): void {
-    if (players.length >= playerLimit) return;
-
-    const botAmount = playerLimit - 1;
-    for(let i = 0; i < botAmount; i++) {
-      addPlayer();
-    }
+  function generateOpponent(): void {
+    if (generatedOpponents) return;
+    addPlayer();
   }
 
   return (
@@ -33,7 +30,7 @@ const Utility = () => {
         -
         <div className="game-status">{gameStatus ? "Running": "Paused"}</div>
         -
-        <div className="generate-opponents btn-default" onClick={generateOpponents}>Generate Opponents</div>
+        <div className={"generate-opponents btn-default" + (generatedOpponents ? " disabled":"")} onClick={generateOpponent}>Generate Opponents</div>
     </div>
   )
 }

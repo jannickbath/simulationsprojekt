@@ -126,6 +126,9 @@ textarea {
     .utility .btn-default.active {
       background-color: rgba(255, 0, 0, 0.2);
       border: 2px solid red; }
+    .utility .btn-default.disabled {
+      opacity: .5;
+      cursor: not-allowed; }
 
 .header {
   display: flex;
