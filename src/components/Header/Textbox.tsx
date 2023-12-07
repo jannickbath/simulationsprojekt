@@ -4,7 +4,7 @@ import { letterArrayToSentence, sentenceToLetterArray } from '../../HelperFuncti
 
 const Textbox = () => {
   const text = useBoundStore(state => state.text.remainingText);
-  const winner = useBoundStore(state => state.leaderboard.winner);
+  const gameStatus = useBoundStore(state => state.game.running);
   const typedText = useBoundStore(state => state.text.typedText);
   const [prevArray, setPrevArray] = useState(sentenceToLetterArray(typedText));
   const updateText = useBoundStore(state => state.updateRemainingText);
@@ -13,7 +13,7 @@ const Textbox = () => {
   // Updates the prevArray if the winner changes -> e.g. the game is restarted and the winner is cleared
   useEffect(() => {
     setPrevArray(sentenceToLetterArray(typedText));
-  },[winner]);
+  },[gameStatus]);
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
