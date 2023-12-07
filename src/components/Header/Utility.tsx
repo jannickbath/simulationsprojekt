@@ -1,16 +1,16 @@
-import { useStartGame, useStopGame } from "../../Game";
+import { useStartGame, useRestartGame } from "../../Game";
 import { useBoundStore } from "../Zustand/useBoundStore";
 
 const Utility = () => {
   const startGame = useStartGame();
-  const stopGame = useStopGame();
+  const restartGame = useRestartGame();
   const addPlayer = useBoundStore(state => state.addPlayer);
   const humanPlayer = useBoundStore(state => state.players).find(player => player.human);
   const gameStatus = useBoundStore(state => state.game.started);
   const playerLimit = useBoundStore(state => state.game.playerLimit);
   const players = useBoundStore(state => state.players);
   const generatedOpponents = players.length >= playerLimit;
-  const handleGameToggle = () => gameStatus ? stopGame() : startGame();
+  const handleGameToggle = () => gameStatus ? restartGame() : startGame();
 
   function generateOpponent(): void {
     if (generatedOpponents) return;
@@ -24,7 +24,7 @@ const Utility = () => {
             {humanPlayer?.speed}
           </div>
           <button className={"start-button btn-default" + (gameStatus ? " active": "")} onClick={handleGameToggle}>
-             {gameStatus ? "Stop Race": "Start Race"}
+             {gameStatus ? "Restart Race": "Start Race"}
           </button>
         </div>
         -
