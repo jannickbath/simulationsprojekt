@@ -6,7 +6,7 @@ const Utility = () => {
   const restartGame = useRestartGame();
   const addPlayer = useBoundStore(state => state.addPlayer);
   const humanPlayer = useBoundStore(state => state.players).find(player => player.human);
-  const gameStatus = useBoundStore(state => state.game.started);
+  const gameStatus = useBoundStore(state => state.game.running);
   const playerLimit = useBoundStore(state => state.game.playerLimit);
   const players = useBoundStore(state => state.players);
   const generatedOpponents = players.length >= playerLimit;

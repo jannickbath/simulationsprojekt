@@ -17,7 +17,7 @@ export type Player = {
 };
 
 export type Game = {
-  started: boolean,
+  running: boolean,
   scene: string,
   playerLimit: number,
   startSeconds: number

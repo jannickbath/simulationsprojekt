@@ -51,7 +51,7 @@ export function useProgressLoop() {
   const npcs = players.filter((player) => !player.human);
   const initialText = useBoundStore(state => state.text.text);
   const startSeconds = useBoundStore(state => state.game.startSeconds);
-  const gameStatus = useBoundStore(state => state.game.started);
+  const gameStatus = useBoundStore(state => state.game.running);
   const typedTextStore = useBoundStore(state => state.text.typedText);
   const typedTextRef = useRef(typedTextStore);
   
