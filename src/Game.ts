@@ -4,7 +4,7 @@ import { calculateProgressbyWordsPerMinute, calculateWordsPerMinute, countWords 
 
 export function useStartGame() {
   const startGame = useBoundStore((state) => state.start);
-  const updateSpeed = useBoundStore((state) => state.updateSpeed);
+  const updatePlayerField = useBoundStore(state => state.updateField);
   const players = useBoundStore((state) => state.players);
   const npcs = players.filter((player) => !player.human);
   
@@ -14,7 +14,7 @@ export function useStartGame() {
       const min = 40;
       const max = 100;
       const randomWPM = Math.floor(Math.random() * (max - min + 1)) + min;
-      updateSpeed(npc.id, randomWPM);
+      updatePlayerField(npc.id, "speed", randomWPM);
     });
   };
 }
@@ -43,7 +43,7 @@ export function useRestartGame() {
 export function useProgressLoop() {
   const [mainInterval, setMainInterval] = useState<number>();
   const updateProgress = useBoundStore((state) => state.updateProgress);
-  const updateSpeed = useBoundStore((state) => state.updateSpeed);
+  const updatePlayerField = useBoundStore(state => state.updateField);
   const humanCar = useBoundStore((state) => state.getHumanCar)();
   const humanPlayer = useBoundStore((state) => state.getHumanPlayer)();
   const players = useBoundStore((state) => state.players);
@@ -83,7 +83,7 @@ export function useProgressLoop() {
       const wpm = calculateWordsPerMinute(prevArrayWords, startSeconds);
   
       if (humanPlayer) {
-        updateSpeed(humanPlayer.id, wpm);
+        updatePlayerField(humanPlayer.id, "speed", wpm);
       }
   
       const calculatedPercentage = calculateProgressbyWordsPerMinute(

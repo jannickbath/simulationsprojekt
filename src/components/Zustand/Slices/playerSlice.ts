@@ -30,13 +30,13 @@ export const playerSlice: StateCreatorFn<PlayerSlice> = (set, get) => ({
     });
   },
   getHumanPlayer: () => get().players.find(player => player.human),
-  updateSpeed: (id, newSpeed) => set((state: State) => {
-    const player = state.players.find(player => player.id === id);
+  updateField: (playerId, field, value) => set((state: State) => {
+    const player = state.players.find(player => player.id === playerId);
     if (player) {
-      const updatedPlayer = { ...player, speed: newSpeed };
-      return  { players: replaceObjectInArray(state.players, updatedPlayer, "id") };
+      const modifiedPlayer = {...player, [field]: value};
+      return {players: replaceObjectInArray(state.players, modifiedPlayer, "id")};
     }
-    throw new Error("Player with the id of " + id + " could not be found.");
+    throw new Error("Player with the id of " + playerId + " could not be found.");
   })
 });
 

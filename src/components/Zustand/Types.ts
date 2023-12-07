@@ -69,9 +69,9 @@ export type UiSlice = {
 export type PlayerSlice = {
   players: Array<Player>;
   addPlayer: (carId?: number) => Player;
-  updateSpeed: (id: number, newSpeed: number) => void;
   getHumanPlayer: () => Player | undefined;
   clearPlayers: () => void;
+  updateField: <Field extends keyof Player>(playerId: number, field: Field, value: Player[Field]) => void;
 };
 
 export type GameSlice = {
