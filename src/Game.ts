@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useBoundStore } from './components/Zustand/useBoundStore';
-import { calculateProgressbyWordsPerMinute, calculateWordsPerMinute, countWords } from './HelperFunctions';
+import { calculateCharsPerMinute, calculateProgressByCharsPerMinute, countChars } from './HelperFunctions';
 
 export function useStartGame() {
   const startGame = useBoundStore((state) => state.start);
@@ -11,10 +11,10 @@ export function useStartGame() {
   return () => {
     startGame();
     npcs.forEach((npc) => {
-      const min = 40;
-      const max = 100;
-      const randomWPM = Math.floor(Math.random() * (max - min + 1)) + min;
-      updatePlayerField(npc.id, "speed", randomWPM);
+      const min = 200;
+      const max = 500;
+      const randomCPM = Math.floor(Math.random() * (max - min + 1)) + min;
+      updatePlayerField(npc.id, "speed", randomCPM);
     });
   };
 }
@@ -60,9 +60,9 @@ export function useProgressLoop() {
     npcs.forEach((npc) => {
       const car = cars.find((car) => car.id === npc.carId);
       if (car) {
-        const progress = calculateProgressbyWordsPerMinute(
+        const progress = calculateProgressByCharsPerMinute(
           npc.speed,
-          countWords(initialText),
+          countChars(initialText),
           startSeconds
         );
         updateProgress(car?.id, `${progress}`);
@@ -78,17 +78,16 @@ export function useProgressLoop() {
       const typedText = typedTextRef.current;
 
       // Update progress
-      const prevArrayWords =
-        countWords(typedText) - 1;
-      const wpm = calculateWordsPerMinute(prevArrayWords, startSeconds);
+      const prevArrayChars = countChars(typedText) - 1;
+      const cpm = calculateCharsPerMinute(prevArrayChars, startSeconds);
   
       if (humanPlayer) {
-        updatePlayerField(humanPlayer.id, "speed", wpm);
+        updatePlayerField(humanPlayer.id, "speed", cpm);
       }
   
-      const calculatedPercentage = calculateProgressbyWordsPerMinute(
-        wpm,
-        countWords(initialText),
+      const calculatedPercentage = calculateProgressByCharsPerMinute(
+        cpm,
+        countChars(initialText),
         startSeconds
       );
   

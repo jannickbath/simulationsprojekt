@@ -17,25 +17,25 @@ export function sentenceToLetterArray(sentence: string): letterArray {
   return letterArray;
 }
 
-export function countWords(sentence: string): number {
-  return sentence.split(' ').length;
+export function countChars(sentence: string): number {
+  return sentence.split("").length;
 }
 
-export function calculateWordsPerMinute(
-  typedWords: number,
+export function calculateCharsPerMinute(
+  typedChars: number,
   startSeconds: number
 ): number {
   const currentTimeInSeconds = Math.floor(Date.now() / 1000);
   const elapsedMinutes = (currentTimeInSeconds - startSeconds) / 60;
-  return parseInt((typedWords / elapsedMinutes).toFixed(0));
+  return parseInt((typedChars / elapsedMinutes).toFixed(0));
 }
 
-export function calculateProgressbyWordsPerMinute(
-  wpm: number,
-  totalWords: number,
+export function calculateProgressByCharsPerMinute(
+  cpm: number,
+  totalChars: number,
   startSeconds: number
 ): number {
-  const secondsTillFinished = (totalWords / wpm) * 60;
+  const secondsTillFinished = (totalChars / cpm) * 60;
   const currentTimeInSeconds = Math.floor(Date.now() / 1000);
   const secondsPassed = currentTimeInSeconds - startSeconds;
   const progress = parseInt(
