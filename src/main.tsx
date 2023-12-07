@@ -13,7 +13,7 @@ const App = () => {
   const winner = useBoundStore(state => state.leaderboard.winner);
   const setWinner = useBoundStore(state => state.setWinner);
   const ui = useBoundStore(state => state.ui);
-  const pushUi = useBoundStore(state => state.pushUi);
+  const unshiftUi = useBoundStore(state => state.unshift);
   const restartGame = useRestartGame();
 
   // Prevent spacebar from scrolling down
@@ -31,7 +31,7 @@ const App = () => {
       const winningPlayer = players.find(player => player.carId == winningCar.id)
       if (winningPlayer) {
         setWinner(winningPlayer);
-        pushUi(<Winner player={winningPlayer}/>);
+        unshiftUi(<Winner player={winningPlayer}/>);
         restartGame();
       }
     }

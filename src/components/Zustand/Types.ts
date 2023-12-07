@@ -62,8 +62,10 @@ export type LeaderboardSlice = {
 export type UiSlice = {
   ui: Array<Popup>;
   pushUi: (popup: Popup) => void;
+  unshift: (popup: Popup) => void;
   clearUi: () => void;
   popUi: () => void;
+  shiftUi: () => void;
 };
 
 export type PlayerSlice = {
