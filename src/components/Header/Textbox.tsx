@@ -31,7 +31,7 @@ const Textbox = () => {
         },
       ];
       setPrevArray(newPrevArray);
-    } else if (pressedKey >= "a" && pressedKey <= "z") {
+    } else if (pressedKey.length <= 1) {
       const newPrevArray = [
         ...prevArray,
         {
