@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import '../src/styles/css/main.css';
-import { useProgressLoop, useRestartGame } from './Game';
+import { useProgressLoop, useReplaceText, useRestartGame } from './Game';
 import { useBoundStore } from './components/Zustand/useBoundStore';
 import Winner from './components/Overlay/Winner';
 import Scene from './components/Scenes/Scene';
@@ -16,6 +16,7 @@ const App = () => {
   const ui = useBoundStore(state => state.ui);
   const unshiftUi = useBoundStore(state => state.unshift);
   const restartGame = useRestartGame();
+  const replaceText = useReplaceText();
   const [loaded, setLoaded] = useState(false);
 
   // Prevent spacebar from scrolling down
@@ -41,6 +42,7 @@ const App = () => {
 
   useEffect(() => {
     if (!loaded) {
+      replaceText();
       unshiftUi(<Welcome />);
       setLoaded(true);
     }
