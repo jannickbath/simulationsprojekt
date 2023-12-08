@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useBoundStore } from './components/Zustand/useBoundStore';
 import { calculateCharsPerMinute, calculateProgressByCharsPerMinute, countChars } from './HelperFunctions';
+import { QuotableApiResponse } from './components/Zustand/Types';
 
 export function useStartGame() {
   const startGame = useBoundStore((state) => state.start);
@@ -20,23 +21,48 @@ export function useStartGame() {
 }
 
 export function useRestartGame() {
-  const { clearPlayers, resetLeaderboard, clearCars, updateTypedText, updateRemainingText, updateProgress, stop } = useBoundStore(state => state);
+  const { clearPlayers, resetLeaderboard, clearCars, updateProgress, stop } = useBoundStore(state => state);
+  const replaceText = useReplaceText();
   const { players, cars } = useBoundStore(state => state);
   const humanPlayer = players.find(player => player.human);
   const humanCar = cars.find(cars => cars.id === humanPlayer?.carId);
-  const originalText = useBoundStore(state => state.text.text);
 
   return () => {
     stop();
     clearPlayers();
     clearCars();
     resetLeaderboard();
-    updateTypedText("");
-    updateRemainingText(originalText);
+    replaceText();
     
     if (humanCar) {
       updateProgress(humanCar.id, "0");
     }
+  }
+}
+
+export function useReplaceText() {
+  const { updateOriginalText, updateRemainingText, updateTypedText } = useBoundStore(state => state);
+
+  const fetchRandomQuote = async () => {
+    try {
+      const response = await fetch("https://api.quotable.io/random");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data: QuotableApiResponse = await response.json();
+      updateOriginalText(data.content);
+      updateRemainingText(data.content);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  };
+
+  return () => {
+    updateTypedText("");
+    updateRemainingText("");
+    fetchRandomQuote();
   }
 }
 

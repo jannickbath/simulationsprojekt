@@ -1,44 +1,53 @@
-import { useEffect, useState } from 'react';
-import { useBoundStore } from '../Zustand/useBoundStore';
-import { letterArrayToSentence, sentenceToLetterArray } from '../../HelperFunctions';
+import { useEffect, useState } from "react";
+import { useBoundStore } from "../Zustand/useBoundStore";
+import {
+  letterArrayToSentence,
+  sentenceToLetterArray,
+} from "../../HelperFunctions";
 
 const Textbox = () => {
-  const text = useBoundStore(state => state.text.remainingText);
-  const gameStatus = useBoundStore(state => state.game.running);
-  const typedText = useBoundStore(state => state.text.typedText);
+  const text = useBoundStore((state) => state.text.remainingText);
+  const gameStatus = useBoundStore((state) => state.game.running);
+  const typedText = useBoundStore((state) => state.text.typedText);
   const [prevArray, setPrevArray] = useState(sentenceToLetterArray(typedText));
-  const updateText = useBoundStore(state => state.updateRemainingText);
-  const updateTypedText = useBoundStore(state => state.updateTypedText);
+  const updateText = useBoundStore((state) => state.updateRemainingText);
+  const updateTypedText = useBoundStore((state) => state.updateTypedText);
 
   // Updates the prevArray if the winner changes -> e.g. the game is restarted and the winner is cleared
   useEffect(() => {
     setPrevArray(sentenceToLetterArray(typedText));
-  },[gameStatus]);
+  }, [gameStatus]);
 
   function keyHandler(event: KeyboardEvent) {
     const pressedKey = event.key;
-    const chars = text.split('');
+    const chars = text.split("");
 
     if (chars[0] == pressedKey) {
-      const newPrevArray = [...prevArray, {
-        value: chars.shift() ?? '',
-        incorrect: false,
-      }];
+      const newPrevArray = [
+        ...prevArray,
+        {
+          value: chars.shift() ?? "",
+          incorrect: false,
+        },
+      ];
       setPrevArray(newPrevArray);
-    } else if (pressedKey >= 'a' && pressedKey <= 'z') {
-      const newPrevArray = [...prevArray, {
-        value: chars.shift() ?? '',
-        incorrect: true,
-      }];
+    } else if (pressedKey >= "a" && pressedKey <= "z") {
+      const newPrevArray = [
+        ...prevArray,
+        {
+          value: chars.shift() ?? "",
+          incorrect: true,
+        },
+      ];
       setPrevArray(newPrevArray);
-    } else if (pressedKey == 'Backspace') {
+    } else if (pressedKey == "Backspace") {
       const toBeRemovedCharacter = prevArray[prevArray.length - 1].value;
       const newPrevArray = prevArray.slice(0, -1);
       chars.unshift(toBeRemovedCharacter);
       setPrevArray(newPrevArray);
     }
 
-    updateText(chars.join(''));
+    updateText(chars.join(""));
     updateTypedText(letterArrayToSentence(prevArray));
   }
 
@@ -59,7 +68,7 @@ const Textbox = () => {
           })}
         </span>
         {text}
-      </div>      
+      </div>
     </div>
   );
 };

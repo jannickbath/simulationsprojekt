@@ -238,6 +238,20 @@ textarea {
   .popup.winner h2 {
     font-size: 30px; }
 
+.popup.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 3rem; }
+  .popup.welcome .get-started {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    background-color: #717172;
+    border-radius: 5px;
+    border: 2px solid black;
+    font-size: 20px;
+    cursor: pointer; }
+
 .popup {
   position: absolute;
   width: 60vw;

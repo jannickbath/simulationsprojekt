@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import '../src/styles/css/main.css';
 import { useProgressLoop, useRestartGame } from './Game';
 import { useBoundStore } from './components/Zustand/useBoundStore';
 import Winner from './components/Overlay/Winner';
 import Scene from './components/Scenes/Scene';
+import Welcome from './components/Overlay/Welcome';
 
 const App = () => {
   useProgressLoop();
@@ -15,6 +16,7 @@ const App = () => {
   const ui = useBoundStore(state => state.ui);
   const unshiftUi = useBoundStore(state => state.unshift);
   const restartGame = useRestartGame();
+  const [loaded, setLoaded] = useState(false);
 
   // Prevent spacebar from scrolling down
   document.addEventListener('keydown', (event: KeyboardEvent) => {
@@ -36,6 +38,13 @@ const App = () => {
       }
     }
   }, [cars, winner])
+
+  useEffect(() => {
+    if (!loaded) {
+      unshiftUi(<Welcome />);
+      setLoaded(true);
+    }
+  }, [loaded])
 
   return (
     <React.StrictMode>
