@@ -43,3 +43,18 @@ export function calculateProgressByCharsPerMinute(
   );
   return Math.min(progress, 100);
 }
+
+export function applyRandomOffset(minOffset: number, maxOffset: number, number: number) {
+  // Ensure minOffset is not greater than maxOffset
+  if (minOffset > maxOffset) {
+    [minOffset, maxOffset] = [maxOffset, minOffset];
+  }
+
+  // Calculate a random offset within the specified range
+  const offset = Math.random() * (maxOffset - minOffset) + minOffset;
+
+  // Randomly decide to add or subtract the offset
+  const shouldAdd = Math.random() > 0.5;
+
+  return shouldAdd ? number + offset : number - offset;
+}

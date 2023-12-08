@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useBoundStore } from './components/Zustand/useBoundStore';
-import { calculateCharsPerMinute, calculateProgressByCharsPerMinute, countChars } from './HelperFunctions';
+import { applyRandomOffset, calculateCharsPerMinute, calculateProgressByCharsPerMinute, countChars } from './HelperFunctions';
 import { QuotableApiResponse } from './components/Zustand/Types';
+import { OriginalNpcSpeeds } from './Types';
 
 export function useStartGame() {
   const startGame = useBoundStore((state) => state.start);
@@ -80,14 +81,23 @@ export function useProgressLoop() {
   const gameStatus = useBoundStore(state => state.game.running);
   const typedTextStore = useBoundStore(state => state.text.typedText);
   const typedTextRef = useRef(typedTextStore);
+  const originalNpcSpeeds = {} as OriginalNpcSpeeds;
   
   function updateNpcCars() {
+    if (Object.keys(originalNpcSpeeds).length === 0) {
+      npcs.forEach(npc => {
+        originalNpcSpeeds[npc.id] = npc.speed;
+      });
+    }
+
     // Update npcs
     npcs.forEach((npc) => {
       const car = cars.find((car) => car.id === npc.carId);
+      const speed = applyRandomOffset(10, 20, originalNpcSpeeds[npc.id]);
+      
       if (car) {
         const progress = calculateProgressByCharsPerMinute(
-          npc.speed,
+          speed,
           countChars(initialText),
           startSeconds
         );

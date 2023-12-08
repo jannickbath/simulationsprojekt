@@ -4,3 +4,7 @@ export type letterArray = [
       incorrect: boolean;
     }
 ];
+
+export type OriginalNpcSpeeds = {
+  [key: string]: number
+}
