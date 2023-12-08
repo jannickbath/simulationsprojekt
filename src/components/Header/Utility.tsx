@@ -11,6 +11,7 @@ const Utility = () => {
   const players = useBoundStore(state => state.players);
   const generatedOpponents = players.length >= playerLimit;
   const handleGameToggle = () => gameStatus ? restartGame() : startGame();
+  let humanPlayerSpeed = humanPlayer?.speed ?? 0;
 
   function generateOpponent(): void {
     if (generatedOpponents) return;
@@ -21,7 +22,7 @@ const Utility = () => {
     <div className="utility">
         <div className="utility__buttons">
           <div className="wpm-display">
-            {humanPlayer?.speed}
+            {Math.max(humanPlayerSpeed, 0)}
           </div>
           <button className={"start-button btn-default" + (gameStatus ? " active": "")} onClick={handleGameToggle}>
              {gameStatus ? "Restart Race": "Start Race"}
