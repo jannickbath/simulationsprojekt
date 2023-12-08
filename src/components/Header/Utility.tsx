@@ -10,12 +10,22 @@ const Utility = () => {
   const playerLimit = useBoundStore(state => state.game.playerLimit);
   const players = useBoundStore(state => state.players);
   const generatedOpponents = players.length >= playerLimit;
-  const handleGameToggle = () => gameStatus ? restartGame() : startGame();
   let humanPlayerSpeed = humanPlayer?.speed ?? 0;
 
   function generateOpponent(): void {
     if (generatedOpponents) return;
     addPlayer();
+  }
+
+  function handleGameToggle() {
+    if (gameStatus) {
+      restartGame();
+    }else {
+      startGame();
+      document.querySelectorAll(".input-div").forEach((el: HTMLDivElement) => {
+        el.focus();
+      });
+    }
   }
 
   return (
