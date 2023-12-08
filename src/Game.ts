@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useBoundStore } from './components/Zustand/useBoundStore';
-import { applyRandomOffset, calculateCharsPerMinute, calculateProgressByCharsPerMinute, countChars } from './HelperFunctions';
+import { applyRandomOffset, calculateCharsPerMinute, calculateProgressByCharsPerMinute, calculateProgressByTypedChars, countChars } from './HelperFunctions';
 import { QuotableApiResponse } from './components/Zustand/Types';
 import { OriginalNpcSpeeds } from './Types';
 
@@ -120,13 +120,9 @@ export function useProgressLoop() {
       if (humanPlayer) {
         updatePlayerField(humanPlayer.id, "speed", cpm);
       }
-  
-      const calculatedPercentage = calculateProgressByCharsPerMinute(
-        cpm,
-        countChars(initialText),
-        startSeconds
-      );
-  
+
+      const calculatedPercentage = calculateProgressByTypedChars(countChars(typedText), countChars(initialText));
+
       if (humanCar) {
         updateProgress(humanCar.id, `${calculatedPercentage}`);
       }

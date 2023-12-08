@@ -44,6 +44,10 @@ export function calculateProgressByCharsPerMinute(
   return Math.min(progress, 100);
 }
 
+export function calculateProgressByTypedChars(typedChars: number, totalChars: number) {
+    return (typedChars / totalChars) * 100;
+}
+
 export function applyRandomOffset(minOffset: number, maxOffset: number, number: number) {
   // Ensure minOffset is not greater than maxOffset
   if (minOffset > maxOffset) {
