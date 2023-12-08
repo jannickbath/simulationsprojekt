@@ -48,7 +48,8 @@ const Textbox = () => {
     }
 
     updateText(chars.join(""));
-    updateTypedText(letterArrayToSentence(prevArray));
+    const prevArrayCorrectChars = prevArray.filter(letter => !letter.incorrect);
+    updateTypedText(letterArrayToSentence(prevArrayCorrectChars));
   }
 
   return (
