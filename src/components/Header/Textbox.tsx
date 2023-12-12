@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useBoundStore } from "../Zustand/useBoundStore";
 import {
   letterArrayToSentence,
@@ -12,6 +12,7 @@ const Textbox = () => {
   const [prevArray, setPrevArray] = useState(sentenceToLetterArray(typedText));
   const updateText = useBoundStore((state) => state.updateRemainingText);
   const updateTypedText = useBoundStore((state) => state.updateTypedText);
+  const inputDivRef = useRef(null);
 
   // Updates the prevArray if the winner changes -> e.g. the game is restarted and the winner is cleared
   useEffect(() => {
@@ -53,8 +54,8 @@ const Textbox = () => {
   }
 
   return (
-    <div className="textbox">
-      <div className="input-div" tabIndex={0} onKeyDown={(e) => keyHandler(e)}>
+    <div className="textbox" onClick={() => {inputDivRef.current.focus()}}>
+      <div className="input-div" ref={inputDivRef} tabIndex={0} onKeyDown={(e) => keyHandler(e)}>
         <span className="previous-text">
           {prevArray.map((obj) => {
             if (!obj.incorrect) {
