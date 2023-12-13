@@ -1,6 +1,6 @@
 const Test = () => {
   return (
-    <div>Test</div>
+    <div className="customClass">Blah</div>
   )
 }
 
