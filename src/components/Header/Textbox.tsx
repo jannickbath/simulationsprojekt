@@ -59,7 +59,9 @@ const Textbox = () => {
         <span className="previous-text">
           {prevArray.map((obj) => {
             if (!obj.incorrect) {
-              return <span>{obj.value}</span>;
+              if (obj.value ?? false) {
+                return <span>{obj.value}</span>;
+              }
             } else {
               return (
                 <span>

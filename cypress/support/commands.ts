@@ -25,13 +25,10 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+Cypress.Commands.add("pseudoElement", { prevSubject: 'element' }, (subject, pseudoElement, property) => {
+    cy.wrap(subject).then(($element) => {
+      const style = window.getComputedStyle($element[0], pseudoElement);
+      return cy.wrap(style.getPropertyValue(property).trim());
+    });
+  });
