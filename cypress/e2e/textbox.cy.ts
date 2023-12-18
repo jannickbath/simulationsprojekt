@@ -1,21 +1,21 @@
 /// <reference types="cypress" />
 
-describe('example to-do app', () => {
+describe('Typeracer', () => {
     beforeEach(() => {
       cy.visit('http://localhost:5174/');
-      cy.wait(400);
     })
 
-    function focusAndPressKeyInTextbox(char) {
+    function focusAndPressKeyInTextbox(char: string) {
       cy.get(".textbox").click(); // focus textbox
       cy.get('.input-div').type(char);
     }
 
-    async function useTextBoxContent(cb) {
+    async function useTextBoxContent(cb: (text: string) => void) {
       cy.get(".input-div").invoke("text").then(cb);
     }
 
     it('Renders correctly with initial text', () => {
+      cy.wait(400);
       cy.get('.textbox').should('exist');
       cy.get('.textbox').should("not.be.empty");
     });
@@ -27,6 +27,7 @@ describe('example to-do app', () => {
     });
 
     it('Handles correct key press', () => {
+      cy.wait(400);
       useTextBoxContent(text => {
         const correctKey = text[0];
         focusAndPressKeyInTextbox(correctKey);
@@ -38,6 +39,7 @@ describe('example to-do app', () => {
     });
   
     it('Handles incorrect key press', () => {
+      cy.wait(400);
       useTextBoxContent(text => {
         const incorrectKey = text[0] == "z" ? "x" : "z";
         focusAndPressKeyInTextbox(incorrectKey);
@@ -48,13 +50,13 @@ describe('example to-do app', () => {
     });
   
     it('Handles backspace key press', () => {
+      cy.wait(400);
       useTextBoxContent(text => {
         const incorrectKey = text[0] == "z" ? "x" : "z";
         focusAndPressKeyInTextbox(incorrectKey);
         cy.get('.input-div').type('{backspace}');
         cy.get('.previous-text span').should("not.exist");
       });
-     
     });
 });
   
