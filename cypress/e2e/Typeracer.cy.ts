@@ -66,5 +66,17 @@ describe('Typeracer', () => {
         cy.get('.previous-text span').should("not.exist");
       });
     });
+
+    it("Can handle opponent generation", () => {
+      cy.get(".car").should("have.length", 1);
+      cy.get(".generate-opponents").click(); // 2
+      cy.get(".car").should("have.length", 2);
+
+      // Check if max amount can be exceeded
+      cy.get(".generate-opponents").click(); // 3
+      cy.get(".generate-opponents").click(); // 4
+      cy.get(".generate-opponents").click(); // 5
+      cy.get(".car").should("have.length", 4);
+    });
 });
   
