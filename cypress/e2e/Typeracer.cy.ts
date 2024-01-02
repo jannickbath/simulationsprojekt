@@ -78,5 +78,36 @@ describe('Typeracer', () => {
       cy.get(".generate-opponents").click(); // 5
       cy.get(".car").should("have.length", 4);
     });
+
+    it("Has a working game loop", () => {
+      cy.get(".generate-opponents").click();
+      cy.get(".generate-opponents").click();
+
+      cy.get(".start-button").click();
+      cy.wait(1000);
+      
+      cy.get('.car:not(.own)').should((el) => {
+        const numericValueOfLeftProperty = parseFloat(el.css("left"));
+        expect(numericValueOfLeftProperty).to.be.greaterThan(0); // 0%
+      });
+
+      cy.get('.car.own').should((el) => {
+        const numericValueOfLeftProperty = parseFloat(el.css("left"));
+        expect(numericValueOfLeftProperty).to.be.eq(0); // 0%
+      });
+
+      // Check for player car movement
+      useTextBoxContent(text => {
+        for (let i = 0; i < 15; i++) {
+          const correctKey = text[i];
+          focusAndPressKeyInTextbox(correctKey);
+        }
+
+        cy.get('.car.own').should((el) => {
+          const numericValueOfLeftProperty = parseFloat(el.css("left"));
+          expect(numericValueOfLeftProperty).to.be.greaterThan(0); // 0%
+        });
+      });
+    });
 });
   
