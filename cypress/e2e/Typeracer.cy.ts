@@ -121,5 +121,30 @@ describe('Typeracer', () => {
         });
       });
     });
+
+    it("Has a working restart button", () => {
+      const gameToggleButton = cy.get(".start-button");
+      cy.wait(400);
+      gameToggleButton.click(); // start
+      
+      useTextBoxContent(text => {
+        for (let i = 0; i < 10; i++) {
+          const correctKey = text[i];
+          focusAndPressKeyInTextbox(correctKey);
+        }
+      });
+
+      cy.get('.car.own').should((el) => {
+        const numericValueOfLeftProperty = parseFloat(el.css("left"));
+        expect(numericValueOfLeftProperty).to.be.above(0); // > 0%
+      });
+
+      gameToggleButton.click(); // restart
+      
+      cy.get('.car.own').should((el) => {
+        const numericValueOfLeftProperty = parseFloat(el.css("left"));
+        expect(numericValueOfLeftProperty).to.be.eq(0); // == 0%
+      });
+    })
 });
   
