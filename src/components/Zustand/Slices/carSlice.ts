@@ -1,13 +1,18 @@
 import { Car, CarSlice, State, StateCreatorFn } from '../Types';
 
-const initialCarState: Array<Car> = [ { id: 1, progress: '0', model: "brick"} ];
+const widths = {
+  default: 270,
+  brick: 305
+};
+const defaultModel = "brick";
+const initialCarState: Array<Car> = [ { id: 1, progress: '0', model: defaultModel, width: widths[defaultModel]} ];
 
 export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
   cars: initialCarState,
   addCar: (model = "default") => {
     let car = {} as Car;
     set((state: State) => {
-      car = { id: state.cars.length + 1, progress: '0', model: model};
+      car = { id: state.cars.length + 1, progress: '0', model: model, width: widths[model]};
       return {
         cars: [...state.cars, car]
       }

@@ -1,11 +1,17 @@
 import barrier_logo from "../../assets/barrier.png";
+import { Item as ItemType } from "../Zustand/Types";
+import Item from "./Item";
 
-const Barrier = () => {
+type BarrierProps = {
+  item?: ItemType
+}
+
+const Barrier = (props: BarrierProps) => {  
   return (
-    <div className="barrier">
-        <img src={barrier_logo} alt="Barriere Logo" />
-    </div>
-  )
+    <Item className="barrier" item={props.item}>
+      <img src={barrier_logo} alt="Barriere Logo" />
+    </Item>
+  );
 }
 
 export default Barrier

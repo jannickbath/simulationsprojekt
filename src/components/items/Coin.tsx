@@ -1,10 +1,16 @@
 import coin_logo from "../../assets/coin.png";
+import { Item as ItemType } from "../Zustand/Types";
+import Item from "./Item";
 
-const Coin = () => {
+type CoinProps = {
+  item?: ItemType
+}
+
+const Coin = (props: CoinProps) => {
   return (
-    <div className="coin">
-        <img src={coin_logo} alt="Coin Logo" />
-    </div>
+    <Item className="coin" item={props.item}>
+      <img src={coin_logo} alt="Coin Logo" />
+    </Item>
   )
 }
 

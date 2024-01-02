@@ -1,0 +1,9 @@
+@import "barrier";
+@import "coin";
+
+.track-wrapper {
+    .item {
+        position: absolute;
+        bottom: -35px;
+    }   
+}

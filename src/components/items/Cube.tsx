@@ -1,11 +1,17 @@
 import cube_logo from "../../assets/cube.png";
+import { Item as ItemType } from "../Zustand/Types";
+import Item from "./Item";
 
-const Cube = () => {
+type CubeProps = {
+  item?: ItemType
+}
+
+const Cube = (props: CubeProps) => {
   return (
-    <div className="cube">
-        <img src={cube_logo} alt="Cube Logo" />
-    </div>
-  )
+    <Item className="cube" item={props.item}>
+      <img src={cube_logo} alt="Cube Logo" />
+    </Item>
+  );
 }
 
 export default Cube

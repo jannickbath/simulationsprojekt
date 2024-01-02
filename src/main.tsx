@@ -15,6 +15,7 @@ const App = () => {
   const setWinner = useBoundStore(state => state.setWinner);
   const ui = useBoundStore(state => state.ui);
   const unshiftUi = useBoundStore(state => state.unshift);
+  const unshiftItem = useBoundStore(state => state.itemUtility.unshift);
   const restartGame = useRestartGame();
   const replaceText = useReplaceText();
   const [loaded, setLoaded] = useState(false);
@@ -44,6 +45,7 @@ const App = () => {
     if (!loaded) {
       replaceText();
       unshiftUi(<Welcome />);
+      unshiftItem({senderId: 1, targetId: 1, type: "Barrier", offset: 50});
       setLoaded(true);
     }
   }, [loaded])

@@ -6,6 +6,7 @@ export type Car = {
   id: number;
   progress: `${number}`;
   model: string;
+  width: number;
 };
 
 export type Player = {
@@ -27,6 +28,15 @@ export type Text = {
   text: string,
   typedText: string,
   remainingText: string
+};
+
+export type ItemType = "Barrier" | "Boost" | "EngineFailure";
+
+export type Item = {
+  senderId: number;
+  targetId: number;
+  type: ItemType;
+  offset: number;
 };
 
 export type Leaderboard = {
@@ -114,6 +124,17 @@ export type LeaderboardSlice = {
   resetLeaderboard: () => void;
 };
 
+export type ItemSlice = {
+  items: Array<Item>;
+  itemUtility: {
+    push: (item: Item) => void;
+    unshift: (item: Item) => void;
+    clear: () => void;
+    pop: () => void;
+    shift: () => void;
+  }
+};
+
 export type UiSlice = {
   ui: Array<Popup>;
   pushUi: (popup: Popup) => void;
@@ -137,7 +158,7 @@ export type GameSlice = {
   stop: () => void;
 };
 
-export type Slices = PlayerSlice & CarSlice & GameSlice & TextSlice & LeaderboardSlice & UiSlice;
+export type Slices = PlayerSlice & CarSlice & GameSlice & TextSlice & LeaderboardSlice & UiSlice & ItemSlice;
 
 // Zustand
 export type State = {
@@ -146,7 +167,8 @@ export type State = {
   game: Game,
   text: Text,
   leaderboard: Leaderboard,
-  ui: Array<Popup>
+  ui: Array<Popup>,
+  items: Array<Item>
 };
 
 export type StateCreatorFn<T> = StateCreator<Slices, [], [], T>;
