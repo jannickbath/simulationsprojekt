@@ -79,10 +79,11 @@ describe('Typeracer', () => {
       cy.get(".car").should("have.length", 4);
     });
 
-    it("Has a working game loop", () => {
+    it("Has working bots", () => {
       cy.get(".generate-opponents").click();
       cy.get(".generate-opponents").click();
 
+      cy.wait(200);
       cy.get(".start-button").click();
       cy.wait(1000);
       
@@ -90,6 +91,11 @@ describe('Typeracer', () => {
         const numericValueOfLeftProperty = parseFloat(el.css("left"));
         expect(numericValueOfLeftProperty).to.be.greaterThan(0); // 0%
       });
+    });
+
+    it("Has a working player car", () => {
+      cy.wait(200);
+      cy.get(".start-button").click();
 
       cy.get('.car.own').should((el) => {
         const numericValueOfLeftProperty = parseFloat(el.css("left"));
@@ -98,14 +104,20 @@ describe('Typeracer', () => {
 
       // Check for player car movement
       useTextBoxContent(text => {
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < text.length; i++) {
           const correctKey = text[i];
           focusAndPressKeyInTextbox(correctKey);
         }
+        focusAndPressKeyInTextbox(" "); // Workaround for current bug
 
+        cy.get('.popup.winner').should("exist");
+        cy.get(".popup.winner h2").should("contain.text", "Player");
+        cy.get('.popup.winner .close-button').click();
+
+        // Check if the automatic reset works. (After the game is over)
         cy.get('.car.own').should((el) => {
           const numericValueOfLeftProperty = parseFloat(el.css("left"));
-          expect(numericValueOfLeftProperty).to.be.greaterThan(0); // 0%
+          expect(numericValueOfLeftProperty).to.be.eq(0); // 0%
         });
       });
     });
