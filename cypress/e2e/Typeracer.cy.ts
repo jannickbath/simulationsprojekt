@@ -1,8 +1,16 @@
 /// <reference types="cypress" />
 
 describe('Typeracer', () => {
+    before(() => {
+      // Check if popup window is displayed correctly
+      cy.visit('http://localhost:5174/');
+      cy.get(".popup.welcome").should("exist");
+    });
+
     beforeEach(() => {
       cy.visit('http://localhost:5174/');
+      // Close the popup window
+      cy.get(".popup.welcome .close-button").click();
     })
 
     function focusAndPressKeyInTextbox(char: string) {
