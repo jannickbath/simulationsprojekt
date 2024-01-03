@@ -1,3 +1,4 @@
+import { progressFromPercentageToAbsoluteAmount } from '../../../HelperFunctions';
 import { Item, ItemSlice, State, StateCreatorFn } from '../Types';
 
 const initialItems: Array<Item> = [];
@@ -8,6 +9,11 @@ export const itemSlice: StateCreatorFn<ItemSlice> = (set) => ({
         return { items: [...state.items, item] }
     }),
     unshift: (item) => set((state: State) => {
+        const targetCar = state.cars.find(car => car.id === item.targetId);
+        if (targetCar) {
+            const progress = progressFromPercentageToAbsoluteAmount(parseInt(targetCar.progress));
+            item.absoluteOffset = progress + targetCar.width + item.offset;
+        }
         return { items: [item, ...state.items] }
     }),
     pop: () => set((state: State) => {

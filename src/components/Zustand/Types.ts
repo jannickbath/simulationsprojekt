@@ -37,6 +37,7 @@ export type Item = {
   targetId: number;
   type: ItemType;
   offset: number;
+  absoluteOffset?: number;
 };
 
 export type Leaderboard = {

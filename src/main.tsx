@@ -45,7 +45,7 @@ const App = () => {
     if (!loaded) {
       replaceText();
       unshiftUi(<Welcome />);
-      unshiftItem({senderId: 1, targetId: 1, type: "Barrier", offset: 50});
+      unshiftItem({senderId: 1, targetId: 1, type: "Barrier", offset: 250});
       setLoaded(true);
     }
   }, [loaded])

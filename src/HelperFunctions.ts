@@ -62,3 +62,9 @@ export function applyRandomOffset(minOffset: number, maxOffset: number, number: 
 
   return shouldAdd ? number + offset : number - offset;
 }
+
+export function progressFromPercentageToAbsoluteAmount(progressPercentage: number): number {
+  const trackElement = document.querySelector(".track") as HTMLDivElement;
+  const trackWidth = trackElement.offsetWidth;
+  return (trackWidth * progressPercentage) / 100;
+}

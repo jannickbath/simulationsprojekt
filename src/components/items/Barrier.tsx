@@ -6,7 +6,7 @@ type BarrierProps = {
   item?: ItemType
 }
 
-const Barrier = (props: BarrierProps) => {  
+const Barrier = (props: BarrierProps) => {
   return (
     <Item className="barrier" item={props.item}>
       <img src={barrier_logo} alt="Barriere Logo" />

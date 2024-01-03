@@ -1,3 +1,4 @@
+import { progressFromPercentageToAbsoluteAmount } from '../../../HelperFunctions';
 import { Car, CarSlice, State, StateCreatorFn } from '../Types';
 
 const widths = {
@@ -42,11 +43,20 @@ export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
   updateProgress: (id, progress) => {
     set((state: State) => {
       const car = state.cars.find(car => car.id === id);
-      if (car) {
-        car.progress = progress;
-      }else {
-        throw new Error("Car could not be found. Progress not updated.")
-      }
+      if (!car) throw new Error("Car could not be found. Progress not updated.");
+
+      const items = state.items.filter(item => item.targetId === id);
+      items.forEach((item) => {
+        const progressDiff = progressFromPercentageToAbsoluteAmount(parseInt(progress)) - progressFromPercentageToAbsoluteAmount(parseInt(car.progress));
+        if (progressDiff >= item.offset) {
+          console.log("Triggered." + " Offset: " + item.offset + " Diff: " + progressDiff);
+        }else {
+          item.offset = item.offset - progressDiff;
+        }
+      });
+      
+      car.progress = progress;
+      
       return {
         cars: [...state.cars, car]
       }
