@@ -46,10 +46,10 @@ export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
       if (!car) throw new Error("Car could not be found. Progress not updated.");
 
       const items = state.items.filter(item => item.targetId === id);
-      items.forEach((item) => {
+      items.forEach((item, key) => {
         const progressDiff = progressFromPercentageToAbsoluteAmount(parseInt(progress)) - progressFromPercentageToAbsoluteAmount(parseInt(car.progress));
         if (progressDiff >= item.offset) {
-          console.log("Triggered." + " Offset: " + item.offset + " Diff: " + progressDiff);
+          get().itemUtility.removeByKey(key);
         }else {
           item.offset = item.offset - progressDiff;
         }

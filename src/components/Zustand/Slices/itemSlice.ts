@@ -26,6 +26,10 @@ export const itemSlice: StateCreatorFn<ItemSlice> = (set) => ({
     }),
     clear: () => set(() => {
         return { items: []}
+    }),
+    removeByKey: (key) => set((state: State) => {
+        state.items.splice(key, 1);
+        return { items: [...state.items] }
     })
   }
 });

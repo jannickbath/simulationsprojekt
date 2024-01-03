@@ -133,6 +133,7 @@ export type ItemSlice = {
     clear: () => void;
     pop: () => void;
     shift: () => void;
+    removeByKey: (key: number) => void;
   }
 };
 
