@@ -1,31 +1,78 @@
-# React + TypeScript + Vite
+# Typeracer Benutzerdokumentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Inhaltsverzeichnis
+- [Einführung](#einführung)
+- [Installation](#installation)
+  - [Voraussetzungen](#voraussetzungen)
+  - [Schritt-für-Schritt Anleitung](#schritt-für-schritt-anleitung)
+- [Erklärung der Benutzeroberfläche](#erklärung-der-benutzeroberfläche)
+- [Verwendung](#verwendung)
+  - [Funktion 1](#funktion-1)
+  - [Funktion 2](#funktion-2)
+- [Problembehebung](#problembehebung)
+- [FAQs](#faqs)
+- [Aktualisierungen](#aktualisierungen)
 
-Currently, two official plugins are available:
+## Einführung
+Kurze Übersicht deiner Software und ihrer Zwecke.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+### Voraussetzungen
+Liste alle Anforderungen auf, die Benutzer vor der Installation benötigen.
 
-## Expanding the ESLint configuration
+- Docker
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Schritt-für-Schritt Anleitung
+1. [Schritt 1]
+2. [Schritt 2]
+3. ...
 
-- Configure the top-level `parserOptions` property like this:
+## Erklärung der Benutzeroberfläche
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+### Start- & Stopfunktion
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Hier eine kurze Erläuterung.
 
-## Design
+### Bots generieren
 
-https://www.figma.com/file/Sx3FbRwBCOsiusKvYtUEDT/Simulationsprojekt?type=design&node-id=0-1&mode=design&t=4UPvskFaB0PFArQU-0
+Hier eine kurze Erläuterung.
+
+### Item einsetzen (LeftAlt)
+
+Hier eine kurze Erläuterung.
+
+### Ziel auswählen (RightAlt)
+
+Hier eine kurze Erläuterung.
+
+### CPM-Anzeige
+
+Hier eine kurze Erläuterung.
+
+## Items
+
+### Barriere
+
+Hier eine kurze Erläuterung.
+
+### Münze
+
+Hier eine kurze Erläuterung.
+
+### Würfel
+
+Hier eine kurze Erläuterung.
+
+## Verwendung
+Erkläre, wie die Hauptfunktionen deiner Software genutzt werden.
+
+### Funktionsweise
+
+### Funktion 1
+Detaillierte Anweisungen und Beispiele für Funktion 1.
+
+### Funktion 2
+Detaillierte Anweisungen und Beispiele für Funktion 2.
+
+## Problembehebung
+Häufig auftretende Probleme und wie man sie lösen kann.
