@@ -1,9 +1,9 @@
 import coin_logo from "../../assets/coin.png";
-import { Item as ItemType } from "../Zustand/Types";
+import { ItemClass } from "../Zustand/Types";
 import Item from "./Item";
 
 type CoinProps = {
-  item?: ItemType
+  item?: ItemClass
 }
 
 const Coin = (props: CoinProps) => {

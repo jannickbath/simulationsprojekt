@@ -1,9 +1,9 @@
 import cube_logo from "../../assets/cube.png";
-import { Item as ItemType } from "../Zustand/Types";
+import { ItemClass } from "../Zustand/Types";
 import Item from "./Item";
 
 type CubeProps = {
-  item?: ItemType
+  item?: ItemClass
 }
 
 const Cube = (props: CubeProps) => {

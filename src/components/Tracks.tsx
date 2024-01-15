@@ -3,18 +3,12 @@ import Default_car from './Cars/Default';
 import Brick_car from "./Cars/Brick";
 import { useBoundStore } from './Zustand/useBoundStore';
 import { Car } from './Zustand/Types';
-import Barrier from './items/Barrier';
 
 const Tracks = () => {
   const players = useBoundStore((store) => store.players);
   const cars = useBoundStore((store) => store.cars);
   const allItems = useBoundStore(state => state.items);
-  const itemComponents = {
-    "Barrier": Barrier,
-    "Boost": Barrier,
-    "EngineFailure": Barrier
-  }
-
+  
   function findCarById(id: number, cars: Array<Car>): Car | undefined {
     return cars.find((car) => car.id === id);
   }
@@ -46,7 +40,7 @@ const Tracks = () => {
           <Track>
             {car_element}
             {filteredItems.map(item => {
-              const ItemComponent = itemComponents[item.type];
+              const ItemComponent = item.renderComponent;
               return (
                 <div className="track-wrapper">
                   <ItemComponent item={item}/>

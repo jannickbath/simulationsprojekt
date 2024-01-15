@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { StateCreator } from 'zustand';
 
 // Objects
@@ -125,11 +125,23 @@ export type LeaderboardSlice = {
   resetLeaderboard: () => void;
 };
 
+export interface ItemClass {
+ senderId: number;
+ targetId: number;
+ offset: number;
+ absoluteOffset: number;
+ renderComponent: React.FC;
+
+ calculateAbsoluteOffset(): number | undefined;
+ activate(): void;
+ destroy?(): void;
+}
+
 export type ItemSlice = {
-  items: Array<Item>;
+  items: Array<ItemClass>;
   itemUtility: {
-    push: (item: Item) => void;
-    unshift: (item: Item) => void;
+    push: (item: ItemClass) => void;
+    unshift: (item: ItemClass) => void;
     clear: () => void;
     pop: () => void;
     shift: () => void;
@@ -170,7 +182,7 @@ export type State = {
   text: Text,
   leaderboard: Leaderboard,
   ui: Array<Popup>,
-  items: Array<Item>
+  items: Array<ItemClass>
 };
 
 export type StateCreatorFn<T> = StateCreator<Slices, [], [], T>;

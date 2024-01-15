@@ -49,6 +49,7 @@ export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
       items.forEach((item, key) => {
         const progressDiff = progressFromPercentageToAbsoluteAmount(parseInt(progress)) - progressFromPercentageToAbsoluteAmount(parseInt(car.progress));
         if (progressDiff >= item.offset) {
+          item.activate();
           get().itemUtility.removeByKey(key);
         }else {
           item.offset = item.offset - progressDiff;

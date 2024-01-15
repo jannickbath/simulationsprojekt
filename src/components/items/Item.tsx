@@ -1,10 +1,10 @@
 import { ReactNode } from "react"
-import { Item as ItemType} from "../Zustand/Types";
+import { ItemClass } from "../Zustand/Types";
 
 type ItemProps = {
     children: ReactNode,
     className: string,
-    item?: ItemType
+    item?: ItemClass
 }
 
 const Item = (props: ItemProps) => {

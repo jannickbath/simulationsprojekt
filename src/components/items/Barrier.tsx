@@ -1,9 +1,9 @@
 import barrier_logo from "../../assets/barrier.png";
-import { Item as ItemType } from "../Zustand/Types";
+import { ItemClass } from "../Zustand/Types";
 import Item from "./Item";
 
 type BarrierProps = {
-  item?: ItemType
+  item?: ItemClass
 }
 
 const Barrier = (props: BarrierProps) => {

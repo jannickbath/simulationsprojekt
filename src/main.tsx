@@ -6,6 +6,7 @@ import { useBoundStore } from './components/Zustand/useBoundStore';
 import Winner from './components/Overlay/Winner';
 import Scene from './components/Scenes/Scene';
 import Welcome from './components/Overlay/Welcome';
+import { BarrierClass } from './components/Zustand/Slices/itemSlice';
 
 const App = () => {
   useProgressLoop();
@@ -45,7 +46,8 @@ const App = () => {
     if (!loaded) {
       replaceText();
       unshiftUi(<Welcome />);
-      unshiftItem({senderId: 1, targetId: 1, type: "Barrier", offset: 250});
+      unshiftItem(new BarrierClass(1, 1, 250));
+      unshiftItem(new BarrierClass(1, 1, 500));
       setLoaded(true);
     }
   }, [loaded])
