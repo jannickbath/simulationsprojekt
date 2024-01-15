@@ -6,7 +6,7 @@ import { useBoundStore } from './components/Zustand/useBoundStore';
 import Winner from './components/Overlay/Winner';
 import Scene from './components/Scenes/Scene';
 import Welcome from './components/Overlay/Welcome';
-import { BarrierClass } from './components/Zustand/Slices/itemSlice';
+import { BarrierClass } from './components/items/Barrier';
 
 const App = () => {
   useProgressLoop();

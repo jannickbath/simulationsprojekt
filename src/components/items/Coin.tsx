@@ -1,16 +1,31 @@
 import coin_logo from "../../assets/coin.png";
 import { ItemClass } from "../Zustand/Types";
-import Item from "./Item";
+import ItemComponent, { Item } from "./Item";
 
 type CoinProps = {
   item?: ItemClass
 }
 
+export class CoinClass extends Item {
+  public renderComponent = Coin;
+  public constructor(senderId: number, targetId: number, offset: number) {
+      super(senderId, targetId, offset);
+  }
+
+  public activate() {
+    console.log("activated");
+  }
+
+  public destroy() {
+      console.log("called before removing");
+  }
+}
+
 const Coin = (props: CoinProps) => {
   return (
-    <Item className="coin" item={props.item}>
+    <ItemComponent className="coin" item={props.item}>
       <img src={coin_logo} alt="Coin Logo" />
-    </Item>
+    </ItemComponent>
   )
 }
 

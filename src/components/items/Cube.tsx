@@ -1,16 +1,31 @@
 import cube_logo from "../../assets/cube.png";
 import { ItemClass } from "../Zustand/Types";
-import Item from "./Item";
+import ItemComponent, { Item } from "./Item";
 
 type CubeProps = {
   item?: ItemClass
 }
 
+export class CubeClass extends Item {
+  public renderComponent = Cube;
+  public constructor(senderId: number, targetId: number, offset: number) {
+      super(senderId, targetId, offset);
+  }
+
+  public activate() {
+    console.log("activated");
+  }
+
+  public destroy() {
+      console.log("called before removing");
+  }
+}
+
 const Cube = (props: CubeProps) => {
   return (
-    <Item className="cube" item={props.item}>
+    <ItemComponent className="cube" item={props.item}>
       <img src={cube_logo} alt="Cube Logo" />
-    </Item>
+    </ItemComponent>
   );
 }
 
