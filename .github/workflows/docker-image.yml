@@ -32,7 +32,6 @@ jobs:
         npm run build
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
-        git add .
-        git commit -m "*compile dist/"
+        git add -A
+        git diff-index --quiet HEAD || git commit -m "*compile dist/"
         git push
-        exit 0
