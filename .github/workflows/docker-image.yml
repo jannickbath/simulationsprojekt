@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Publish Docker Image
 
 on:
   push:
@@ -7,11 +7,8 @@ on:
     branches: [ "master" ]
 
 jobs:
-
-  build:
-
+  build_and_publish:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
@@ -25,13 +22,3 @@ jobs:
 
     - name: Push to Docker Hub
       run: docker push jannickbath/simulationsprojekt:$(date +%d-%m-%y)
-
-    - name: Compile and Commit static files
-      run: |
-        npm install
-        npm run build
-        git config --global user.email "github-actions@github.com"
-        git config --global user.name "GitHub Actions"
-        git add -A
-        git diff-index --quiet HEAD || git commit -m "*compile dist/"
-        git push
