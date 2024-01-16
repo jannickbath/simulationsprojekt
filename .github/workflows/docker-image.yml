@@ -35,3 +35,4 @@ jobs:
         git add .
         git commit -m "*compile dist/"
         git push
+        exit 0
