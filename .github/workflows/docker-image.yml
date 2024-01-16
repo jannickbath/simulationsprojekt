@@ -1,0 +1,34 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag simulationsprojekt:$(date +%s)
+      
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Push to Docker Hub
+      run: docker push jannickbath/simulationsprojekt:$(date +%s)
+
+    - name: Compile and Commit static files
+      run: |
+        npm install
+        npm run build
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add .
+        git commit -m "*compile dist/"
+        git push
