@@ -17,6 +17,7 @@
 Kurze Übersicht deiner Software und ihrer Zwecke.
 
 ## Installation
+
 ### Voraussetzungen
 Liste alle Anforderungen auf, die Benutzer vor der Installation benötigen.
 
@@ -80,13 +81,17 @@ Häufig auftretende Probleme und wie man sie lösen kann.
 ## Docker container bauen
 
 ```bash
-docker build -t yourImageName . # Returns a hex code which is the name of the image
+# Building
+docker build -t [yourImageName] .
+docker save [imageName] | gzip > [fileName].tar.gz
 
+# Running
+docker load -i [fileName].tar.gz
+docker run -p 5174:5174 [imageName]
+
+# Useful commands
 docker run -it [imageName]
 docker exec -it [containerName] /bin/sh
-
-docker save [imageName] | gzip > [fileName].tar.gz
-docker load -i [fileName].tar.gz
 
 # Create snapshot of running container
 docker pause <container_name_or_id>
