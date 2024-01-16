@@ -130,7 +130,7 @@ export interface ItemClass {
  targetId: number;
  offset: number;
  absoluteOffset: number;
- renderComponent: React.FC;
+ renderComponent: React.FC<{item: ItemClass}>;
 
  calculateAbsoluteOffset(): number | undefined;
  activate(): void;

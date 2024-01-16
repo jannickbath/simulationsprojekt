@@ -10,7 +10,7 @@ const Utility = () => {
   const playerLimit = useBoundStore(state => state.game.playerLimit);
   const players = useBoundStore(state => state.players);
   const generatedOpponents = players.length >= playerLimit;
-  let humanPlayerSpeed = humanPlayer?.speed ?? 0;
+  const humanPlayerSpeed = humanPlayer?.speed ?? 0;
 
   function generateOpponent(): void {
     if (generatedOpponents) return;
@@ -22,6 +22,7 @@ const Utility = () => {
       restartGame();
     }else {
       startGame();
+      //@ts-expect-error .input-div is always present and it is a div
       document.querySelectorAll(".input-div").forEach((el: HTMLDivElement) => {
         el.focus();
       });

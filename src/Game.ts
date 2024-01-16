@@ -68,7 +68,7 @@ export function useReplaceText() {
 }
 
 export function useProgressLoop() {
-  const [mainInterval, setMainInterval] = useState<number>();
+  const [mainInterval, setMainInterval] = useState<NodeJS.Timeout>();
   const updateProgress = useBoundStore((state) => state.updateProgress);
   const updatePlayerField = useBoundStore(state => state.updateField);
   const humanCar = useBoundStore((state) => state.getHumanCar)();
@@ -110,7 +110,7 @@ export function useProgressLoop() {
     if (mainInterval) clearInterval(mainInterval);
     if (!gameStatus) return;
 
-    const id = setInterval(() => {
+    const interval = setInterval(() => {
       const typedText = typedTextRef.current;
 
       // Update progress
@@ -130,7 +130,7 @@ export function useProgressLoop() {
       updateNpcCars();
     }, 1000);
 
-    setMainInterval(id);
+    setMainInterval(interval);
   }, [gameStatus]);
 
   // Update the typedTextRef when typedText changes

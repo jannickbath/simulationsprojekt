@@ -19,7 +19,7 @@ const Textbox = () => {
     setPrevArray(sentenceToLetterArray(typedText));
   }, [gameStatus]);
 
-  function keyHandler(event: KeyboardEvent) {
+  function keyHandler(event: React.KeyboardEvent<HTMLDivElement>) {
     const pressedKey = event.key;
     const chars = text.split("");
 
@@ -54,7 +54,12 @@ const Textbox = () => {
   }
 
   return (
-    <div className="textbox" onClick={() => {inputDivRef.current.focus()}}>
+    <div className="textbox" onClick={() => {
+      const inputElement = inputDivRef.current as HTMLInputElement | null;
+      if (inputElement) {
+        inputElement.focus()
+      }
+      }}>
       <div className="input-div" ref={inputDivRef} tabIndex={0} onKeyDown={(e) => keyHandler(e)}>
         <span className="previous-text">
           {prevArray.map((obj) => {
