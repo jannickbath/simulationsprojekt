@@ -1,5 +1,10 @@
 FROM node:alpine
 
+RUN apk update \
+  && apk upgrade
+
+RUN apk add php
+
 COPY . /srv/app
 
 COPY start.sh /start.sh
