@@ -18,6 +18,33 @@ Kurze Übersicht deiner Software und ihrer Zwecke.
 
 ## Installation
 
+### Docker
+
+Vorraussetzungen:
+- Docker (bzw. unter Windows -> Docker Desktop)
+
+Das Projekt kann mithilfe von docker mit einem Befehl installiert & ausgeführt werden.
+
+```bash
+docker run -p 5174:5174 jannickbath/simulationsprojekt:latest
+```
+
+### Source
+
+Vorraussetzungen:
+- Linux-System
+- NodeJS
+- NPM
+
+Auf einem Linux-System kann das Repository geklont und direkt ausgeführt werden.
+
+```bash
+npm i # Installiert alle Abhängigkeiten
+npm run dev # Started das Programm
+```
+
+Anschließend ist das Programm unter [localhost:5174](localhost:5174) erreichbar.
+
 ### Voraussetzungen
 Liste alle Anforderungen auf, die Benutzer vor der Installation benötigen.
 
