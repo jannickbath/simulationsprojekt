@@ -18,6 +18,32 @@ Kurze Übersicht deiner Software und ihrer Zwecke.
 
 ## Installation
 
+Empfohlen für Windows:
+
+### Python
+
+Vorraussetzungen:
+- Python
+
+```bash
+python3 -m http.server 5174
+# oder
+py -m http.server 5174
+```
+
+### PHP
+
+Vorraussetzungen:
+- PHP
+
+Repository klonen und in den Ordner navigieren. Nach anschließendem Ausführen des Kommandos, sollte das Programm unter [localhost:5174](localhost:5174) erreichbar sein.
+
+```bash
+php -S localhost:5174
+```
+
+Empfohlen für Linux:
+
 ### Docker
 
 Vorraussetzungen:
