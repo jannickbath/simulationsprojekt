@@ -76,3 +76,21 @@ Detaillierte Anweisungen und Beispiele für Funktion 2.
 
 ## Problembehebung
 Häufig auftretende Probleme und wie man sie lösen kann.
+
+## Docker container bauen
+
+```bash
+docker build -t yourImageName . # Returns a hex code which is the name of the image
+
+docker run -it [imageName]
+docker exec -it [containerName] /bin/sh
+
+docker save [imageName] | gzip > [fileName].tar.gz
+docker load -i [fileName].tar.gz
+
+# Create snapshot of running container
+docker pause <container_name_or_id>
+docker commit <container_name_or_id> my_snapshot:latest
+docker save my_snapshot:latest | gzip > [fileName].tar.gz
+docker run -d --name snapshot_container -p 8080:80 my_snapshot:latest
+```
