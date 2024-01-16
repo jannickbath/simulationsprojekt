@@ -85,9 +85,18 @@ Häufig auftretende Probleme und wie man sie lösen kann.
 docker build -t [yourImageName] .
 docker save [imageName] | gzip > [fileName].tar.gz
 
-# Running
+# Publish to Docker Hub
+docker login # if not already
+# (If no tag is specified :latest will be used)
+docker tag [localImageName][:localImageTag] [dockerId/username]/[repoName][:repoTag]
+docker push [dockerId/username]/[repoName][:repoTag]
+
+# Running from local image
 docker load -i [fileName].tar.gz
 docker run -p 5174:5174 [imageName]
+
+# Running from docker hub
+docker run -p 5174:5174 jannickbath/simulationsprojekt:latest
 
 # Useful commands
 docker run -it [imageName]
