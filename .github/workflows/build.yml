@@ -14,18 +14,13 @@ jobs:
       uses: actions/checkout@v3
       with:
         ref: 'master'
-        path: 'temp'
     - name: Build and commit static files
       run: |
-        cd temp
         npm install
         npm run build
-        cd ../
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
-        cp -r temp/dist ./dist
-        git add -A --force dist/
+        git rm -r --cached .
+        git add --force dist/
         git diff-index --quiet HEAD || git commit -m "*compile dist/"
         git push origin HEAD:build
-
-    
