@@ -23,4 +23,4 @@ jobs:
         git rm -r --cached .
         git add --force dist/
         git diff-index --quiet HEAD || git commit -m "*compile dist/"
-        git push origin HEAD:build
+        git push --force origin HEAD:build
