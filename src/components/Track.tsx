@@ -16,7 +16,7 @@ const Track: React.FC<{children: ReactNode}> = ({ children }) => {
         <div className="track" ref={trackRef}>
             <div className="top"></div>
             <div className="lines">
-                {[...Array(stripeAmount)].map((el, index) => (
+                {[...Array(stripeAmount)].map((_, index) => (
                     <div className="stripe" key={index}></div>
                 ))}
             </div>
