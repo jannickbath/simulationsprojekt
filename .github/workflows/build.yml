@@ -21,6 +21,8 @@ jobs:
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
         git rm -r --cached .
+        mv README_build.md README.md
         git add --force dist/
+        git add --force README.md
         git diff-index --quiet HEAD || git commit -m "*compile dist/"
         git push --force origin HEAD:build

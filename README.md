@@ -23,9 +23,17 @@ Eine aktuelle Demo von diesem Projekt ist unter [https://jannickbath.github.io/s
 
 ## Installation
 
-Empfohlen für Windows:
+### Windows
 
-### Python
+#### Vorbereitung
+
+```bash
+git clone https://github.com/jannickbath/simulationsprojekt.git
+git checkout build
+cd dist
+```
+
+#### Python
 
 Vorraussetzungen:
 - Python
@@ -36,20 +44,22 @@ python3 -m http.server 5174
 py -m http.server 5174
 ```
 
-### PHP
+Anschließend ist das Programm unter [localhost:5174](localhost:5174) erreichbar.
+
+#### PHP
 
 Vorraussetzungen:
 - PHP
-
-Repository klonen und in den Ordner navigieren. Nach anschließendem Ausführen des Kommandos, sollte das Programm unter [localhost:5174](localhost:5174) erreichbar sein.
 
 ```bash
 php -S localhost:5174
 ```
 
-Empfohlen für Linux:
+Anschließend ist das Programm unter [localhost:5174](localhost:5174) erreichbar.
 
-### Docker
+### Linux
+
+#### Docker
 
 Vorraussetzungen:
 - Docker (bzw. unter Windows -> Docker Desktop)
@@ -60,26 +70,7 @@ Das Projekt kann mithilfe von docker mit einem Befehl installiert & ausgeführt 
 docker run -p 5174:5174 jannickbath/simulationsprojekt:latest
 ```
 
-### Source
-
-Vorraussetzungen:
-- Linux-System
-- NodeJS
-- NPM
-
-Auf einem Linux-System kann das Repository geklont und direkt ausgeführt werden.
-
-```bash
-npm i # Installiert alle Abhängigkeiten
-npm run dev # Started das Programm
-```
-
 Anschließend ist das Programm unter [localhost:5174](localhost:5174) erreichbar.
-
-### Voraussetzungen
-Liste alle Anforderungen auf, die Benutzer vor der Installation benötigen.
-
-- Docker
 
 ### Schritt-für-Schritt Anleitung
 1. [Schritt 1]
