@@ -10,11 +10,8 @@ import { BarrierClass } from './components/items/Barrier';
 
 const App = () => {
   useProgressLoop();
-  const players = useBoundStore(state => state.players);
-  const cars = useBoundStore(state => state.cars);
+  const { players, cars, ui, setWinner } = useBoundStore(state => state);
   const winner = useBoundStore(state => state.leaderboard.winner);
-  const setWinner = useBoundStore(state => state.setWinner);
-  const ui = useBoundStore(state => state.ui);
   const unshiftUi = useBoundStore(state => state.unshift);
   const unshiftItem = useBoundStore(state => state.itemUtility.unshift);
   const restartGame = useRestartGame();

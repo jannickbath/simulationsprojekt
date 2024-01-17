@@ -131,7 +131,7 @@ export function useProgressLoop() {
     }, 1000);
 
     setMainInterval(interval);
-  }, [gameStatus]);
+  }, [gameStatus, initialText]);
 
   // Update the typedTextRef when typedText changes
   useEffect(() => {

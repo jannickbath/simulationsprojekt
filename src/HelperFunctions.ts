@@ -1,4 +1,5 @@
 import { letterArray } from "./Types";
+import { QuotableApiResponse } from "./components/Zustand/Types";
 
 export function letterArrayToSentence(letterArray: letterArray): string {
   let sentence = '';
@@ -67,4 +68,26 @@ export function progressFromPercentageToAbsoluteAmount(progressPercentage: numbe
   const trackElement = document.querySelector(".track") as HTMLDivElement;
   const trackWidth = trackElement.offsetWidth;
   return (trackWidth * progressPercentage) / 100;
+}
+
+/**
+ * Fetches a random quote given a max length.
+ * @param maxLength - Max length of the quote. Must be at least 25
+ * @returns Promise containing an array of QuotableApiResponse
+ */
+export async function fetchRandomQuote(maxLength: number): Promise<Array<QuotableApiResponse> | undefined> {
+  if (maxLength < 25) return Promise.resolve(undefined);
+
+  try {
+    const url = "https://api.quotable.io/quotes/random?maxLength=" + maxLength;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json() as Promise<Array<QuotableApiResponse>>;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+  }
 }

@@ -117,6 +117,7 @@ export type TextSlice = {
   updateTypedText: (newText: string) => void;
   updateRemainingText: (newText: string) => void;
   updateOriginalText: (newText: string) => void;
+  addWords: (words: Array<string>) => void;
 };
 
 export type LeaderboardSlice = {

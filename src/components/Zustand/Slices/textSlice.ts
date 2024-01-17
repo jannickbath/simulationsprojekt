@@ -14,5 +14,9 @@ export const textSlice: StateCreatorFn<TextSlice> = (set) => ({
   }),
   updateOriginalText: (newText) => set((state: State) => {
     return { text: { ...state.text, text: newText} }
-  })
+  }),
+  addWords: (words) => set((state: State) => {
+    const addedWordsAsString = " " + words.join(" ") + " ";
+    return { text: { ...state.text, text: state.text.text + addedWordsAsString, remainingText: state.text.remainingText + addedWordsAsString } }
+  }),
 });

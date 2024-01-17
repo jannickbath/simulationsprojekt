@@ -1,6 +1,8 @@
 import barrier_logo from "../../assets/barrier.png";
 import { ItemClass } from "../Zustand/Types";
 import ItemComponent, { Item } from "./Item";
+import { useBoundStore } from "../Zustand/useBoundStore";
+import { fetchRandomQuote } from "../../HelperFunctions";
 
 type BarrierProps = {
   item?: ItemClass
@@ -13,7 +15,14 @@ export class BarrierClass extends Item {
   }
 
   public activate() {
-    console.log("activated");
+    const state = useBoundStore.getState();
+    
+    (async () => {
+      const responseJSON = await fetchRandomQuote(30);
+      if (responseJSON) {
+        state.addWords(responseJSON[0].content.split(" "));
+      }
+    })();
   }
 
   public destroy() {
