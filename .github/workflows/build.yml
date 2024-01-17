@@ -17,8 +17,10 @@ jobs:
         path: 'temp'
     - name: Build and commit static files
       run: |
+        cd temp
         npm install
         npm run build
+        cd ../
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
         cp -r temp/dist ./dist
