@@ -10,14 +10,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout into temporary folder
+      uses: actions/checkout@v3
+      with:
+        ref: 'master'
+        path: 'temp'
     - name: Build and commit static files
       run: |
         npm install
         npm run build
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
-        git add -f dist/
+        cp -r temp/dist ./dist
+        git add -A --force dist/
         git diff-index --quiet HEAD || git commit -m "*compile dist/"
         git push origin HEAD:build
 
