@@ -62,14 +62,14 @@ const Textbox = () => {
       }}>
       <div className="input-div" ref={inputDivRef} tabIndex={0} onKeyDown={(e) => keyHandler(e)}>
         <span className="previous-text">
-          {prevArray.map((obj) => {
+          {prevArray.map((obj, letterIndex) => {
             if (!obj.incorrect) {
               if (obj.value ?? false) {
-                return <span>{obj.value}</span>;
+                return <span key={letterIndex}>{obj.value}</span>;
               }
             } else {
               return (
-                <span>
+                <span key={letterIndex}>
                   <b>{obj.value}</b>
                 </span>
               );

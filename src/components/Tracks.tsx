@@ -15,7 +15,7 @@ const Tracks = () => {
 
   return (
     <div className="tracks">
-      {players.map(player => {
+      {players.map((player, trackIndex) => {
         const filteredItems = allItems.filter(item => item.targetId === player.carId);
         const car = findCarById(player.carId, cars);
         if (!car) return;
@@ -37,12 +37,12 @@ const Tracks = () => {
         }
 
         return (
-          <Track>
+          <Track key={trackIndex}>
             {car_element}
-            {filteredItems.map(item => {
+            {filteredItems.map((item, itemIndex) => {
               const ItemComponent = item.renderComponent;
               return (
-                <div className="track-wrapper">
+                <div className="track-wrapper" key={itemIndex}>
                   <ItemComponent item={item}/>
                 </div>
               );

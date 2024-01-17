@@ -2,15 +2,15 @@ import { ReactNode } from "react";
 import { useBoundStore } from "../Zustand/useBoundStore";
 
 type PopupProps = {
-  children: ReactNode,
-  className: string
+  children: ReactNode;
+  className: string;
 }
 
 const Popup: React.FC<PopupProps> = (props) => {
   const { children } = props;
-  const clearUi = useBoundStore(state => state.clearUi);
-  const popUi = useBoundStore(state => state.popUi);
+  const { clearUi, popUi } = useBoundStore(state => state);
   const uiQueue = useBoundStore(state => state.ui);
+  const indexOfPopup = uiQueue.length - 1;
 
   function handleClose() {
     clearUi();
@@ -21,7 +21,7 @@ const Popup: React.FC<PopupProps> = (props) => {
   }
 
   return (
-    <div className={"popup " + props.className ?? ""}>
+    <div className={"popup " + props.className ?? ""} key={indexOfPopup}>
         {children}
         <div className="button-section">
           <button className="button-section__exit" onClick={handleClose}>Exit</button>

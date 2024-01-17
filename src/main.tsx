@@ -20,6 +20,7 @@ const App = () => {
   const restartGame = useRestartGame();
   const replaceText = useReplaceText();
   const [loaded, setLoaded] = useState(false);
+  let reactNodeCounter = 0;
 
   // Prevent spacebar from scrolling down
   document.addEventListener('keydown', (event: KeyboardEvent) => {
@@ -36,7 +37,7 @@ const App = () => {
       const winningPlayer = players.find(player => player.carId == winningCar.id)
       if (winningPlayer) {
         setWinner(winningPlayer);
-        unshiftUi(<Winner player={winningPlayer}/>);
+        unshiftUi(<Winner player={winningPlayer} key={reactNodeCounter++}/>);
         restartGame();
       }
     }
@@ -45,7 +46,7 @@ const App = () => {
   useEffect(() => {
     if (!loaded) {
       replaceText();
-      unshiftUi(<Welcome />);
+      unshiftUi(<Welcome key={reactNodeCounter++}/>);
       unshiftItem(new BarrierClass(1, 1, 250));
       unshiftItem(new BarrierClass(1, 1, 500));
       setLoaded(true);
