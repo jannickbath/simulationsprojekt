@@ -104,8 +104,8 @@ export type QuotableApiResponse = {
 
 // Slices
 export type CarSlice = {
-  cars: Array<Car>;
-  addCar: (model?: CarModel) => Car;
+  cars: Array<CarClassType>;
+  addCar: (model?: CarModel) => CarClassType;
   removeCar: (id: number) => void;
   clearCars: () => void;
   getHumanCar: () => Car | undefined;
@@ -136,6 +136,19 @@ export interface ItemClass {
  calculateAbsoluteOffset(): number | undefined;
  activate(): void;
  destroy?(): void;
+}
+export interface CarClassType {
+  id: number;
+  progress: `${number}`;
+  model: string;
+  width: number;
+  renderComponent: React.FC<CarProps>;
+ }
+
+export type CarProps = {
+  progress: `${number}`;
+  own: boolean;
+  player_name: string;
 }
 
 export type ItemSlice = {
@@ -178,7 +191,7 @@ export type Slices = PlayerSlice & CarSlice & GameSlice & TextSlice & Leaderboar
 // Zustand
 export type State = {
   players: Array<Player>;
-  cars: Array<Car>;
+  cars: Array<CarClassType>;
   game: Game,
   text: Text,
   leaderboard: Leaderboard,

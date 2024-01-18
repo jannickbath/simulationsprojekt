@@ -1,23 +1,53 @@
 import { progressFromPercentageToAbsoluteAmount } from '../../../HelperFunctions';
-import { Car, CarSlice, State, StateCreatorFn } from '../Types';
+import Brick from '../../Cars/Brick';
+import Default from '../../Cars/Default';
+import { CarClassType, CarProps, CarSlice, State, StateCreatorFn } from '../Types';
 
-const widths = {
-  default: 270,
-  brick: 305
-};
-const defaultModel = "brick";
-const initialCarState: Array<Car> = [ { id: 1, progress: '0', model: defaultModel, width: widths[defaultModel]} ];
+export abstract class CarClass implements CarClassType {
+  public id;
+  public progress;
+  public abstract model: string;
+  public abstract width: number;
+  public abstract renderComponent: React.FC<CarProps>;
+
+  public constructor(id: number, progress: `${number}`) {
+      this.id = id;
+      this.progress = progress;
+  }
+}
+
+export class CarDefault extends CarClass {
+  public renderComponent: React.FC<CarProps> = Default;
+  public width: number = 270;
+  public model: string = "default";
+}
+
+export class CarBrick extends CarClass {
+  public renderComponent: React.FC<CarProps> = Brick;
+  public width: number = 305;
+  public model: string = "brick";
+}
+
+const initialCarState: Array<CarClassType> = [
+  new CarBrick(1, "0")
+];
 
 export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
   cars: initialCarState,
   addCar: (model = "default") => {
-    let car = {} as Car;
+    let car: CarClassType;
     set((state: State) => {
-      car = { id: state.cars.length + 1, progress: '0', model: model, width: widths[model]};
+      const id = state.cars.length + 1;
+      if (model === "default") {
+        car = new CarDefault(id, "0");
+      }else {
+        car = new CarBrick(id, "0");
+      }
       return {
         cars: [...state.cars, car]
       }
     });
+    //@ts-expect-error Will always be assigned, because a car is always created.
     return car;
   },
   removeCar: (id) => {

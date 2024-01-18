@@ -1,4 +1,6 @@
-const Default = (props: any) => {
+import { CarProps } from "../Zustand/Types";
+
+const Default = (props: CarProps) => {
   const progress = props.progress + "%";
   
   return (

@@ -1,15 +1,13 @@
 import Track from './Track';
-import Default_car from './Cars/Default';
-import Brick_car from "./Cars/Brick";
 import { useBoundStore } from './Zustand/useBoundStore';
-import { Car } from './Zustand/Types';
+import { CarClassType } from './Zustand/Types';
 
 const Tracks = () => {
   const players = useBoundStore((store) => store.players);
   const cars = useBoundStore((store) => store.cars);
   const allItems = useBoundStore(state => state.items);
   
-  function findCarById(id: number, cars: Array<Car>): Car | undefined {
+  function findCarById(id: number, cars: Array<CarClassType>): CarClassType | undefined {
     return cars.find((car) => car.id === id);
   }
 
@@ -20,25 +18,11 @@ const Tracks = () => {
         const car = findCarById(player.carId, cars);
         if (!car) return;
 
-        let car_element = <Default_car
-          id={player.carId}
-          player_name={player.name}
-          own={player.human}
-          progress={car.progress}
-        />
-
-        if (car.model === "brick") {
-          car_element = <Brick_car
-            id={player.carId}
-            player_name={player.name}
-            own={player.human}
-            progress={car.progress}
-          />
-        }
+        const CarComponent = car.renderComponent;
 
         return (
           <Track key={trackIndex}>
-            {car_element}
+            <CarComponent progress={car.progress} own={player.human} player_name={player.name}/>
             {filteredItems.map((item, itemIndex) => {
               const ItemComponent = item.renderComponent;
               return (

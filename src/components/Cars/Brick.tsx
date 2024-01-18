@@ -1,4 +1,6 @@
-const Brick = (props: any) => {
+import { CarProps } from "../Zustand/Types";
+
+const Brick = (props: CarProps) => {
   const progress = props.progress + "%";
 
   return (
