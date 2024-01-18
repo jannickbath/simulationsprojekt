@@ -128,7 +128,7 @@ export function useProgressLoop() {
       }
   
       updateNpcCars();
-    }, 1000);
+    }, 500);
 
     setMainInterval(interval);
   }, [gameStatus, initialText]);
