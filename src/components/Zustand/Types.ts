@@ -143,9 +143,14 @@ export interface CarClassType {
   model: string;
   width: number;
   renderComponent: React.FC<CarProps>;
+  componentReference: React.RefObject<HTMLDivElement>;
+  setComponentReference: (ref: React.RefObject<HTMLDivElement>) => void;
+  addClass: (className: string) => void;
+  removeClass: (className: string) => void;
  }
 
 export type CarProps = {
+  car: CarClassType;
   progress: `${number}`;
   own: boolean;
   player_name: string;

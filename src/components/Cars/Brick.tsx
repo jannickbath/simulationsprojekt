@@ -1,10 +1,18 @@
+import { useEffect, useRef } from "react";
 import { CarProps } from "../Zustand/Types";
 
 const Brick = (props: CarProps) => {
   const progress = props.progress + "%";
+  const localCompReference = useRef(null);
+
+  useEffect(() => {
+    if (localCompReference) {
+      props.car.setComponentReference(localCompReference);
+    }
+  }, [localCompReference])
 
   return (
-    <div className={`car car-brick ${props.own ? "own" : ""}`} style={{left: progress}}>
+    <div className={`car car-brick ${props.own ? "own" : ""}`} style={{left: progress}} ref={localCompReference}>
         <div className="car__body">
           <div className="car__body__topper">
             <div className="car__body__topper__front-glas"></div>

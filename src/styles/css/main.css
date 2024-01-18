@@ -156,6 +156,8 @@ textarea {
   height: calc(150px / 1);
   position: absolute;
   transition: left 1.5s linear; }
+  .car.active {
+    border: 2px solid red; }
   .car .player-name {
     width: fit-content;
     height: fit-content;
@@ -310,6 +312,8 @@ textarea {
   height: calc(150px / 1.35);
   position: absolute;
   transition: left 1.5s linear; }
+  .scene-road .car.active {
+    border: 2px solid red; }
   .scene-road .car .player-name {
     width: fit-content;
     height: fit-content;

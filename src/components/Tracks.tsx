@@ -22,7 +22,7 @@ const Tracks = () => {
 
         return (
           <Track key={trackIndex}>
-            <CarComponent progress={car.progress} own={player.human} player_name={player.name}/>
+            <CarComponent car={car} progress={car.progress} own={player.human} player_name={player.name} />
             {filteredItems.map((item, itemIndex) => {
               const ItemComponent = item.renderComponent;
               return (

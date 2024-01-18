@@ -5,6 +5,7 @@ import {
   sentenceToLetterArray,
 } from "../../HelperFunctions";
 import { letterArray } from "../../Types";
+import { useSelectTarget } from "../../Game";
 
 const Textbox = () => {
   const text = useBoundStore((state) => state.text.remainingText);
@@ -13,6 +14,7 @@ const Textbox = () => {
   const [prevArray, setPrevArray] = useState(sentenceToLetterArray(typedText));
   const updateText = useBoundStore((state) => state.updateRemainingText);
   const updateTypedText = useBoundStore((state) => state.updateTypedText);
+  const selectTarget = useSelectTarget();
   const inputDivRef = useRef(null);
 
   // Updates the prevArray if the winner changes -> e.g. the game is restarted and the winner is cleared
@@ -34,7 +36,14 @@ const Textbox = () => {
         },
       ];
       setPrevArray(newPrevArray);
-    } else if (pressedKey.length <= 1) {
+    }else if(pressedKey == "Alt") {
+      // Left
+      selectTarget();
+      console.log("left alt");
+    }else if(pressedKey == "AltGraph") {
+      // Right
+      console.log("right alt");
+    }else if (pressedKey.length <= 1) {
       newPrevArray = [
         ...prevArray,
         {

@@ -138,3 +138,28 @@ export function useProgressLoop() {
     typedTextRef.current = typedTextStore;
   }, [typedTextStore]);
 }
+
+export function useSelectTarget() {
+  const cars = useBoundStore(state => state.cars);
+  const botPlayers = useBoundStore(state => state.players).filter(player => !player.human);
+  const botCars = botPlayers.map(bot => cars.find(car => bot.carId === car.id));
+  const [counter, setCounter] = useState<number>(0);
+
+  return () => {
+    setCounter(counter+1);
+    if (counter > botCars.length - 1) {
+      setCounter(0);
+    }
+
+    botCars.forEach((botCar, index) => {
+      const indexMatches = index === counter;
+      if (botCar) {
+        if (indexMatches) {
+          botCar.addClass("active");
+        }else {
+          botCar.removeClass("active");
+        }
+      }
+    });
+  }
+}

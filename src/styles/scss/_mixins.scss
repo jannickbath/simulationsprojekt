@@ -4,6 +4,10 @@
     position: absolute;
     transition: left 1.5s linear;
 
+    &.active {
+        border: 2px solid red;
+    }
+
     .player-name {
         width: fit-content;
         height: fit-content;

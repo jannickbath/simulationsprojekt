@@ -1,3 +1,4 @@
+import React from 'react';
 import { progressFromPercentageToAbsoluteAmount } from '../../../HelperFunctions';
 import Brick from '../../Cars/Brick';
 import Default from '../../Cars/Default';
@@ -6,13 +7,32 @@ import { CarClassType, CarProps, CarSlice, State, StateCreatorFn } from '../Type
 export abstract class CarClass implements CarClassType {
   public id;
   public progress;
+  public componentReference: React.RefObject<HTMLDivElement> = React.createRef();
   public abstract model: string;
   public abstract width: number;
   public abstract renderComponent: React.FC<CarProps>;
-
+  
   public constructor(id: number, progress: `${number}`) {
       this.id = id;
       this.progress = progress;
+  }
+
+  public setComponentReference(ref: React.RefObject<HTMLDivElement>) {
+    this.componentReference = ref;
+  }
+
+  public addClass(className: string) {
+    const component = this.componentReference.current;
+    if (component) {
+      component.classList.add(className);
+    }
+  }
+
+  public removeClass(className: string) {
+    const component = this.componentReference.current;
+    if (component) {
+      component.classList.remove(className);
+    }
   }
 }
 
