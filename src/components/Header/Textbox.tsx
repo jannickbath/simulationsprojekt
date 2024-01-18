@@ -4,6 +4,7 @@ import {
   letterArrayToSentence,
   sentenceToLetterArray,
 } from "../../HelperFunctions";
+import { letterArray } from "../../Types";
 
 const Textbox = () => {
   const text = useBoundStore((state) => state.text.remainingText);
@@ -22,34 +23,33 @@ const Textbox = () => {
   function keyHandler(event: React.KeyboardEvent<HTMLDivElement>) {
     const pressedKey = event.key;
     const chars = text.split("");
+    let newPrevArray: letterArray = [];
 
     if (chars[0] == pressedKey) {
-      const newPrevArray = [
+      newPrevArray = [
         ...prevArray,
         {
           value: chars.shift() ?? "",
           incorrect: false,
         },
       ];
-      setPrevArray(newPrevArray);
     } else if (pressedKey.length <= 1) {
-      const newPrevArray = [
+      newPrevArray = [
         ...prevArray,
         {
           value: chars.shift() ?? "",
           incorrect: true,
         },
       ];
-      setPrevArray(newPrevArray);
     } else if (pressedKey == "Backspace") {
       const toBeRemovedCharacter = prevArray[prevArray.length - 1].value;
-      const newPrevArray = prevArray.slice(0, -1);
+      newPrevArray = prevArray.slice(0, -1);
       chars.unshift(toBeRemovedCharacter);
-      setPrevArray(newPrevArray);
     }
 
+    const prevArrayCorrectChars = newPrevArray.filter(letter => !letter.incorrect);
+    setPrevArray(newPrevArray);
     updateText(chars.join(""));
-    const prevArrayCorrectChars = prevArray.filter(letter => !letter.incorrect);
     updateTypedText(letterArrayToSentence(prevArrayCorrectChars));
   }
 
