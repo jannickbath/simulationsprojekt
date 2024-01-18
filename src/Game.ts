@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useBoundStore } from './components/Zustand/useBoundStore';
 import { applyRandomOffset, calculateCharsPerMinute, calculateProgressByCharsPerMinute, calculateProgressByTypedChars, countChars } from './HelperFunctions';
-import { QuotableApiResponse } from './components/Zustand/Types';
+import { CarClassType, QuotableApiResponse } from './components/Zustand/Types';
 import { OriginalNpcSpeeds } from './Types';
 
 export function useStartGame() {
@@ -139,15 +139,17 @@ export function useProgressLoop() {
   }, [typedTextStore]);
 }
 
-export function useSelectTarget() {
+export function useSelectTarget(): () => CarClassType | undefined {
   const cars = useBoundStore(state => state.cars);
   const botPlayers = useBoundStore(state => state.players).filter(player => !player.human);
   const botCars = botPlayers.map(bot => cars.find(car => bot.carId === car.id));
   const [counter, setCounter] = useState<number>(0);
 
   return () => {
+    let carToBeReturned;
+
     setCounter(counter+1);
-    if (counter > botCars.length - 1) {
+    if (counter === botCars.length - 1) {
       setCounter(0);
     }
 
@@ -156,10 +158,13 @@ export function useSelectTarget() {
       if (botCar) {
         if (indexMatches) {
           botCar.addClass("active");
+          carToBeReturned = botCar;
         }else {
           botCar.removeClass("active");
         }
       }
     });
+    
+    return carToBeReturned;
   }
 }
