@@ -33,6 +33,7 @@ const Textbox = () => {
           incorrect: false,
         },
       ];
+      setPrevArray(newPrevArray);
     } else if (pressedKey.length <= 1) {
       newPrevArray = [
         ...prevArray,
@@ -41,14 +42,15 @@ const Textbox = () => {
           incorrect: true,
         },
       ];
+      setPrevArray(newPrevArray);
     } else if (pressedKey == "Backspace") {
       const toBeRemovedCharacter = prevArray[prevArray.length - 1].value;
       newPrevArray = prevArray.slice(0, -1);
       chars.unshift(toBeRemovedCharacter);
+      setPrevArray(newPrevArray);
     }
 
     const prevArrayCorrectChars = newPrevArray.filter(letter => !letter.incorrect);
-    setPrevArray(newPrevArray);
     updateText(chars.join(""));
     updateTypedText(letterArrayToSentence(prevArrayCorrectChars));
   }
