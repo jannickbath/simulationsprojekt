@@ -8,9 +8,6 @@ type CoinProps = {
 
 export class CoinClass extends Item {
   public renderComponent = Coin;
-  public constructor(senderId: number, targetId: number, offset: number) {
-      super(senderId, targetId, offset);
-  }
 
   public activate() {
     console.log("activated");

@@ -10,9 +10,6 @@ type BarrierProps = {
 
 export class BarrierClass extends Item {
   public renderComponent = Barrier;
-  public constructor(senderId: number, targetId: number, offset: number) {
-      super(senderId, targetId, offset);
-  }
 
   public activate() {
     const state = useBoundStore.getState();

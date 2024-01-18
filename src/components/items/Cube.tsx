@@ -8,9 +8,6 @@ type CubeProps = {
 
 export class CubeClass extends Item {
   public renderComponent = Cube;
-  public constructor(senderId: number, targetId: number, offset: number) {
-      super(senderId, targetId, offset);
-  }
 
   public activate() {
     console.log("activated");
