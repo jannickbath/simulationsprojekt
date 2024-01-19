@@ -25,9 +25,13 @@ export type Game = {
 };
 
 export type Text = {
-  text: string,
-  typedText: string,
-  remainingText: string
+  text: string;
+  typedText: string;
+  remainingText: string;
+  originalText: string;
+  penalties: {
+    [playerId: number]: Array<string>;
+  }
 };
 
 export type ItemType = "Barrier" | "Boost" | "EngineFailure";
@@ -116,8 +120,10 @@ export type TextSlice = {
   text: Text;
   updateTypedText: (newText: string) => void;
   updateRemainingText: (newText: string) => void;
+  updateText: (newText: string) => void;
   updateOriginalText: (newText: string) => void;
-  addWords: (words: Array<string>) => void;
+  addSentences: (playerId: number, sentences: Array<string>) => void;
+  resetPenalties: () => void;
 };
 
 export type LeaderboardSlice = {

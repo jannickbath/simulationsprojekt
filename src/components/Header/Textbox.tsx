@@ -14,7 +14,7 @@ const Textbox = () => {
   const gameStatus = useBoundStore((state) => state.game.running);
   const typedText = useBoundStore((state) => state.text.typedText);
   const [prevArray, setPrevArray] = useState(sentenceToLetterArray(typedText));
-  const updateText = useBoundStore((state) => state.updateRemainingText);
+  const updateRemainingText = useBoundStore((state) => state.updateRemainingText);
   const updateTypedText = useBoundStore((state) => state.updateTypedText);
   const selectTarget = useSelectTarget();
   const inputDivRef = useRef(null);
@@ -67,7 +67,7 @@ const Textbox = () => {
     }
 
     const prevArrayCorrectChars = newPrevArray.filter(letter => !letter.incorrect);
-    updateText(chars.join(""));
+    updateRemainingText(chars.join(""));
     updateTypedText(letterArrayToSentence(prevArrayCorrectChars));
   }
 

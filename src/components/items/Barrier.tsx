@@ -17,7 +17,7 @@ export class BarrierClass extends Item {
     (async () => {
       const responseJSON = await fetchRandomQuote(30);
       if (responseJSON) {
-        state.addWords(responseJSON[0].content.split(" "));
+        state.addSentences(this.targetId, [responseJSON[0].content]);
       }
     })();
   }

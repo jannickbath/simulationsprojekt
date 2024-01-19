@@ -27,6 +27,7 @@ export function useRestartGame() {
   const { players, cars } = useBoundStore(state => state);
   const humanPlayer = players.find(player => player.human);
   const humanCar = cars.find(cars => cars.id === humanPlayer?.carId);
+  const resetPenalties = useBoundStore(state => state.resetPenalties);
 
   return () => {
     stop();
@@ -34,6 +35,7 @@ export function useRestartGame() {
     clearCars();
     resetLeaderboard();
     replaceText();
+    resetPenalties();
     
     if (humanCar) {
       updateProgress(humanCar.id, "0");
@@ -42,7 +44,7 @@ export function useRestartGame() {
 }
 
 export function useReplaceText() {
-  const { updateOriginalText, updateRemainingText, updateTypedText } = useBoundStore(state => state);
+  const { updateOriginalText, updateRemainingText, updateTypedText, updateText } = useBoundStore(state => state);
 
   const fetchRandomQuote = async () => {
     try {
@@ -55,6 +57,7 @@ export function useReplaceText() {
       const data: QuotableApiResponse = await response.json();
       updateOriginalText(data.content);
       updateRemainingText(data.content);
+      updateText(data.content);
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
@@ -76,12 +79,14 @@ export function useProgressLoop() {
   const players = useBoundStore((state) => state.players);
   const cars = useBoundStore((state) => state.cars);
   const npcs = players.filter((player) => !player.human);
-  const initialText = useBoundStore(state => state.text.text);
+  const initialText = useBoundStore(state => state.text.originalText);
+  const playerText = useBoundStore(state => state.text.text);
   const startSeconds = useBoundStore(state => state.game.startSeconds);
   const gameStatus = useBoundStore(state => state.game.running);
   const typedTextStore = useBoundStore(state => state.text.typedText);
   const typedTextRef = useRef(typedTextStore);
   const originalNpcSpeeds = {} as OriginalNpcSpeeds;
+  const textPenalties = useBoundStore(state => state.text.penalties);
   
   function updateNpcCars() {
     if (Object.keys(originalNpcSpeeds).length === 0) {
@@ -94,11 +99,12 @@ export function useProgressLoop() {
     npcs.forEach((npc) => {
       const car = cars.find((car) => car.id === npc.carId);
       const speed = applyRandomOffset(10, 20, originalNpcSpeeds[npc.id]);
+      const penaltyText = textPenalties[npc.id] ?? [];
       
       if (car) {
         const progress = calculateProgressByCharsPerMinute(
           speed,
-          countChars(initialText),
+          countChars(initialText + penaltyText.join("")),
           startSeconds
         );
         updateProgress(car?.id, `${progress}`);
@@ -121,7 +127,7 @@ export function useProgressLoop() {
         updatePlayerField(humanPlayer.id, "speed", cpm);
       }
 
-      const calculatedPercentage = calculateProgressByTypedChars(countChars(typedText), countChars(initialText));
+      const calculatedPercentage = calculateProgressByTypedChars(countChars(typedText), countChars(playerText));
 
       if (humanCar) {
         updateProgress(humanCar.id, `${calculatedPercentage}`);
@@ -131,7 +137,7 @@ export function useProgressLoop() {
     }, 500);
 
     setMainInterval(interval);
-  }, [gameStatus, initialText]);
+  }, [gameStatus, playerText, textPenalties]);
 
   // Update the typedTextRef when typedText changes
   useEffect(() => {
