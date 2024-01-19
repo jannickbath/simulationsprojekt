@@ -3,10 +3,8 @@ import Barrier from "../items/Barrier"
 const PowerUpView = () => {
   return (
     <div className="powerUpView">
-        <div className="item">
-            <Barrier />
-        </div>
-        <p>LeftAlt</p>
+      <Barrier />
+      <p>LeftAlt</p>
     </div>
   )
 }

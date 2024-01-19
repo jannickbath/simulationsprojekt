@@ -144,6 +144,7 @@ export function useSelectTarget(): () => CarClassType | undefined {
   const botPlayers = useBoundStore(state => state.players).filter(player => !player.human);
   const botCars = botPlayers.map(bot => cars.find(car => bot.carId === car.id));
   const [counter, setCounter] = useState<number>(0);
+  const pingItemAnimation = usePingItemAnimation();
 
   return () => {
     let carToBeReturned;
@@ -152,6 +153,8 @@ export function useSelectTarget(): () => CarClassType | undefined {
     if (counter === botCars.length - 1) {
       setCounter(0);
     }
+
+    pingItemAnimation();
 
     botCars.forEach((botCar, index) => {
       const indexMatches = index === counter;
@@ -166,5 +169,18 @@ export function useSelectTarget(): () => CarClassType | undefined {
     });
     
     return carToBeReturned;
+  }
+}
+
+export function usePingItemAnimation(): () => void {
+  return () => {
+    const dot = document.querySelector(".powerUpView .item.util .animation-dot");
+    if (dot) {
+      dot.classList.add("active");
+
+      setTimeout(() => {
+        dot.classList.remove("active");
+      }, 150);
+    }
   }
 }

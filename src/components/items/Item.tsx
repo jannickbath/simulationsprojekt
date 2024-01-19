@@ -53,7 +53,11 @@ const ItemComponent = (props: ItemProps) => {
   }
   
   return (
-    <div className={`item ${props.className}`}>
+    <div className={`item util ${props.className}`}>
+        <div className="animation-dot">
+          <div className="outer-dot"></div>
+          <div className="inner-dot"></div>
+        </div>
         {children}
     </div>
   );
