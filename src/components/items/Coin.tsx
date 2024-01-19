@@ -8,6 +8,7 @@ type CoinProps = {
 
 export class CoinClass extends Item {
   public renderComponent = Coin;
+  public activated: boolean = false;
 
   public activate() {
     console.log("activated");

@@ -9,22 +9,27 @@ type BarrierProps = {
 }
 
 export class BarrierClass extends Item {
-  public renderComponent = Barrier;
+    public renderComponent = Barrier;
+    public activated: boolean = false;
 
-  public activate() {
-    const state = useBoundStore.getState();
-    
-    (async () => {
-      const responseJSON = await fetchRandomQuote(30);
-      if (responseJSON) {
-        state.addSentences(this.targetId, [responseJSON[0].content]);
-      }
-    })();
-  }
+    public activate() {
+        if (!this.activated) {
+          const state = useBoundStore.getState();
+          (async () => {
+              const responseJSON = await fetchRandomQuote(30);
+              if (responseJSON) {
+                  state.addSentences(this.targetId, [
+                      responseJSON[0].content,
+                  ]);
+              }
+          })();
+          this.activated = true;
+        }
+    }
 
-  public destroy() {
-      console.log("called before removing");
-  }
+    public destroy() {
+        console.log('called before removing');
+    }
 }
 
 const Barrier = (props: BarrierProps) => {

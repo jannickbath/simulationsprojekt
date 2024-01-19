@@ -23,11 +23,11 @@ export const itemSlice: StateCreatorFn<ItemSlice> = (set, get) => ({
     }),
     removeByKey: (key) => set((state: State) => {
         const itemToBeRemoved = get().items[key];
-        if (itemToBeRemoved.destroy) {
+        if (itemToBeRemoved?.destroy) {
             itemToBeRemoved.destroy();
         }
         state.items.splice(key, 1);
-        return { items: [...state.items] }
+        return { items: state.items }
     })
   }
 });

@@ -8,6 +8,7 @@ type CubeProps = {
 
 export class CubeClass extends Item {
   public renderComponent = Cube;
+  public activated: boolean = false;
 
   public activate() {
     console.log("activated");

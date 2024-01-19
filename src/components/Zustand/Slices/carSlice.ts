@@ -90,7 +90,7 @@ export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
       console.error("No human player could be found.");
     }
   },
-  updateProgress: (id, progress, forward = false) => {
+  updateProgress: (id, progress) => {
     set((state: State) => {
       const car = state.cars.find(car => car.id === id);
       if (!car) throw new Error("Car could not be found. Progress not updated.");
@@ -99,9 +99,7 @@ export const carSlice: StateCreatorFn<CarSlice> = (set, get) => ({
       items.forEach((item, key) => {
         const progressDiff = progressFromPercentageToAbsoluteAmount(parseInt(progress)) - progressFromPercentageToAbsoluteAmount(parseInt(car.progress));
         if (progressDiff >= item.offset) {
-          if (!forward) {
-            item.activate();
-          }
+          item.activate();
           get().itemUtility.removeByKey(key);
         }else {
           item.offset = item.offset - progressDiff;

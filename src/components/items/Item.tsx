@@ -14,6 +14,7 @@ export abstract class Item implements ItemClass {
   public targetId: number;
   public offset: number;
   public absoluteOffset: number;
+  public abstract activated: boolean;
   public abstract renderComponent: React.FC;
 
   public constructor(senderId: number, targetId: number, offset: number) {
