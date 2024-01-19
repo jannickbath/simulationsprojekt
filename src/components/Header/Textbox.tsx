@@ -5,7 +5,7 @@ import {
   sentenceToLetterArray,
 } from "../../HelperFunctions";
 import { letterArray } from "../../Types";
-import { useSelectTarget } from "../../Game";
+import { usePingTargetAnimation, useSelectTarget } from "../../Game";
 import { CarClassType } from "../Zustand/Types";
 import { BarrierClass } from "../items/Barrier";
 
@@ -20,6 +20,7 @@ const Textbox = () => {
   const inputDivRef = useRef(null);
   const [activeTarget, setActiveTarget] = useState<CarClassType|undefined>();
   const unshiftItem = useBoundStore(state => state.itemUtility.unshift);
+  const pingTargetAnimation = usePingTargetAnimation();
 
   // Updates the prevArray if the winner changes -> e.g. the game is restarted and the winner is cleared
   useEffect(() => {
@@ -46,6 +47,7 @@ const Textbox = () => {
     }else if(pressedKey == "AltGraph") {
       // Right
       if (activeTarget) {
+        pingTargetAnimation();
         unshiftItem(new BarrierClass(1, activeTarget.id, 100));
       }
     }else if (pressedKey.length <= 1) {

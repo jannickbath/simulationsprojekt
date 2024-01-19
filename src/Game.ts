@@ -184,3 +184,16 @@ export function usePingItemAnimation(): () => void {
     }
   }
 }
+
+export function usePingTargetAnimation(): () => void {
+  return () => {
+    const dot = document.querySelector(".target .animation-dot");
+    if (dot) {
+      dot.classList.add("active");
+
+      setTimeout(() => {
+        dot.classList.remove("active");
+      }, 150);
+    }
+  }
+}
