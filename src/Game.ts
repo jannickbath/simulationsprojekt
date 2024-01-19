@@ -174,7 +174,7 @@ export function useSelectTarget(): () => CarClassType | undefined {
 
 export function usePingItemAnimation(): () => void {
   return () => {
-    const dot = document.querySelector(".powerUpView .item.util .animation-dot");
+    const dot = document.querySelector(".powerUpView .animation-dot");
     if (dot) {
       dot.classList.add("active");
 
