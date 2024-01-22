@@ -136,3 +136,21 @@ Die Integrationstests fokussieren sich darauf, die Wechselwirkungen zwischen den
 Die Dokumentation erfolgt durch sorgfältige Kommentierung des Codes, wobei besonderes Augenmerk auf die Erläuterung von Funktionen, Strukturen und Implementierungsdetails gelegt wird.
 
 Die Kommentierung zielt darauf ab, die Klarheit und Verständlichkeit der Codebasis zu verbessern.
+
+## 7. Personal-, Sachmittel-, Termin- und Kostenplanung (Ressourcenplanung)
+
+### 7.1 Personalplanung
+
+Die alleinige Umsetzung des Projekts erfolgt im Rahmen meiner Ausbildung als Fachinformatiker für Anwendungsentwicklung. Alle Entwicklungsaktivitäten, von der Planung über die Umsetzung bis zur Dokumentation, fallen in meinen Verantwortungsbereich.
+
+### 7.2 Sachmittelplanung
+
+Die genutzten Tools für die Entwicklung, wie React, TypeScript, Zustand und Cypress, sind kostenfrei verfügbar und erfordern keine zusätzlichen finanziellen Aufwendungen. Diese Auswahl gewährleistet eine kosteneffiziente Entwicklung.
+
+### 7.3 Terminplanung
+
+Die Terminplanung unterteilt sich in verschiedene Phasen: Planung (15%), Umsetzung (50%) und Dokumentation (35%). Die zeitliche Verteilung ermöglicht eine gezielte Fokussierung auf jede Phase des Projekts. Von den insgesamt verfügbaren 80 Stunden entfallen demnach 12 Stunden auf die Planung, 40 Stunden auf die Umsetzung und 28 Stunden auf die Dokumentation.
+
+### 7.4 Kostenplanung
+
+Da alle genutzten Tools kostenfrei sind und keine externen Ressourcen eingebunden werden, entstehen keine direkten Kosten im Rahmen der Entwicklung. Die Kostenplanung beschränkt sich somit auf die effiziente Nutzung der verfügbaren Zeit.
