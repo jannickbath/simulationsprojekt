@@ -1,19 +1,44 @@
-\documentclass{article}
+\documentclass[hidelinks,12pt]{article}
 \usepackage{enumitem}
 \usepackage{titlesec}
+\usepackage[utf8]{inputenc}
 \usepackage[left=2.5cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[german]{babel}
 
-\setcounter{secnumdepth}{4}
-\titleformat{\paragraph}
-{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titlespacing*{\paragraph}
-{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+% Header settings
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Autor: Jannick Bath / FIN 11}
+\lhead{Simulationsprojekt Dokumentation}
+\rfoot{\thepage}
+\lfoot{Datum: \today}
 
 \begin{document}
 
-\title{Simulationsprojekt Dokumentation}
+\begin{titlepage}
+    \centering
+    \vspace*{4cm} % Adjust the vertical space as needed
 
-\maketitle
+    \huge\bfseries Simulationsprojekt Dokumentation\par
+    \vspace{1.5cm} % Adjust the vertical space as needed
+
+    \Large 22.01.2024\par
+    \vspace{1.5cm} % Adjust the vertical space as needed
+
+    \large Jannick Bath\par
+    \vspace{4cm} % Adjust the vertical space as needed
+
+    \vfill
+
+\end{titlepage}
+
+\newpage
+
+\tableofcontents % Hier wird das Inhaltsverzeichnis eingefügt
+
+\newpage
 
 \section{Projektziel}
 Das Hauptziel dieses Projekts besteht darin, ein herausforderndes und lehrreiches Singleplayer-Rennspiel zu entwickeln, bei dem die Spieler ihre Fahrzeuge durch das Schreiben von Texten steuern. Die Schreibgeschwindigkeit beeinflusst die Fortbewegungsgeschwindigkeit der Fahrzeuge direkt. Zusätzlich soll ein spezieller Zufallsfaktor in Form von zufälligen Geschwindigkeitsänderungen für Bots und verschiedenen Items, wie Barrieren, das Spielerlebnis variabel gestalten.
@@ -127,7 +152,7 @@ Die Dokumentation erfolgt durch sorgfältige Kommentierung des Codes, wobei beso
 
 Die Kommentierung zielt darauf ab, die Klarheit und Verständlichkeit der Codebasis zu verbessern.
 
-\section{Personal-, Sachmittel-, Termin- und Kostenplanung (Ressourcenplanung)}
+\section{Ressourcenplanung}
 
 \subsection{Personalplanung}
 Die alleinige Umsetzung des Projekts erfolgt im Rahmen meiner Ausbildung als Fachinformatiker für Anwendungsentwicklung. Alle Entwicklungsaktivitäten, von der Planung über die Umsetzung bis zur Dokumentation, fallen in meinen Verantwortungsbereich.
@@ -169,7 +194,7 @@ Da alle genutzten Tools kostenfrei sind und keine externen Ressourcen eingebunde
     \item Überarbeitung und Verbesserung der Dokumentation nach Bedarf.
 \end{itemize}
 
-\section{Darstellung der Prozessketten und/- oder Prozess-Schnittstellen}
+\section{Darstellung der Prozessketten}
 
 \subsection{Benutzeroberfläche (UI)}
 Die Nutzerschnittstelle bildet den Ausgangspunkt der Prozessketten. Hier interagiert der Nutzer mit der Anwendung, gibt Texte ein und erhält Feedback zum Fortschritt. Die Prozesskette beginnt mit der Erfassung der Nutzereingabe in der Textbox und setzt sich fort mit der Verarbeitung dieser Eingabe, um die Simulation entsprechend zu beeinflussen.
