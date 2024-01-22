@@ -154,3 +154,71 @@ Die Terminplanung unterteilt sich in verschiedene Phasen: Planung (15%), Umsetzu
 ### 7.4 Kostenplanung
 
 Da alle genutzten Tools kostenfrei sind und keine externen Ressourcen eingebunden werden, entstehen keine direkten Kosten im Rahmen der Entwicklung. Die Kostenplanung beschränkt sich somit auf die effiziente Nutzung der verfügbaren Zeit.
+
+## 8. Ablaufplanung
+
+### 8.1 Planungsphase (15% der Gesamtzeit - 12 Stunden)
+
+- Definition der Projektziele und Anforderungen.
+- Auswahl der geeigneten Tools und Technologien.
+- Festlegung der Architektur und Designgrundlagen.
+
+### 8.2 Umsetzungsphase (50% der Gesamtzeit - 40 Stunden)
+
+- Design und Entwicklung der Benutzeroberfläche (UI).
+- Implementierung der grundlegenden Mechaniken des Text-basierten Rennspiels.
+- Integration von Simulationsgeschwindigkeiten und Animationen.
+- Einbindung von Items und Zufallsfaktoren.
+
+### 8.3 Dokumentationsphase (35% der Gesamtzeit - 28 Stunden)
+
+- Fortlaufende Dokumentation der Entwicklungsfortschritte.
+- Kommentierung des Codes für eine klare Nachvollziehbarkeit.
+- Erstellung der Projektdokumentation im Markdown-Format.
+- Überarbeitung und Verbesserung der Dokumentation nach Bedarf.
+
+## 9. Darstellung der Prozessketten und/- oder Prozess-Schnittstellen
+
+### 9.1 Benutzeroberfläche (UI)
+
+Die Nutzerschnittstelle bildet den Ausgangspunkt der Prozessketten. Hier interagiert der Nutzer mit der Anwendung, gibt Texte ein und erhält Feedback zum Fortschritt. Die Prozesskette beginnt mit der Erfassung der Nutzereingabe in der Textbox und setzt sich fort mit der Verarbeitung dieser Eingabe, um die Simulation entsprechend zu beeinflussen.
+
+### 9.2 Textbasiertes Rennspiel
+
+Die Mechaniken des textbasierten Rennspiels bilden den zentralen Prozess. Hier werden die eingegebenen Texte verarbeitet, die Simulationsgeschwindigkeiten berechnet und die Animationen der Fahrzeuge gesteuert. Die Schnittstellen zwischen der Benutzeroberfläche und dem Spielprozess sind entscheidend, um eine reibungslose Interaktion zu gewährleisten.
+
+### 9.3 Zufallsfaktoren und Items
+
+Die Integration von Zufallsfaktoren und Items führt zu weiteren Prozessketten. Hier werden die verschiedenen Elemente, die das Spiel dynamisch gestalten, in den Ablauf eingebunden. Die Schnittstellen zwischen dem textbasierten Rennspiel und den Zufallsfaktoren sind dabei essenziell, um einen organischen und unterhaltsamen Spielverlauf zu ermöglichen.
+
+### 9.4 Dokumentation und Code-Kommentierung
+
+Die Prozessketten setzen sich bis zur Dokumentation und Code-Kommentierung fort. Hier wird der Entwicklungsprozess transparent dokumentiert, und die Schnittstellen zwischen dem Code und der projektspezifischen Dokumentation gewährleisten eine klare Nachvollziehbarkeit.
+
+## 10. Vorgehensweise
+
+Die Entwicklung des Simulationsprojekts orientierte sich an einem Wasserfall-Vorgehensmodell. In der Planungsphase wurden die Projektziele konkretisiert, indem die Idee eines textbasierten Rennspiels formuliert wurde, das sowohl die Anforderungen des Simulationsprojekts erfüllt als auch unterhaltsamen Spielspaß bietet.
+
+Als Methode zur Visualisierung und groben Konzeptualisierung diente das Design-Tool Figma, welches die Grundstruktur des Projekts skizzierte. Die genauen Funktionen wurden zu diesem Zeitpunkt noch nicht im Detail festgelegt.
+
+Während der Umsetzungsphase traten Herausforderungen auf, insbesondere im Bereich des State-Managements. Die Standard-Features von Reacts State-Management erwiesen sich aufgrund zahlreicher Abhängigkeiten zwischen verschiedenen Komponenten als unzureichend. Als Lösung wurde die Integration der "Zustand"-Bibliothek gewählt, um eine effiziente Verwaltung des Anwendungsstatus zu ermöglichen.
+
+Es gab Anpassungen an der ursprünglichen Planung, insbesondere im Bereich des State-Managements. Die anfängliche Absicht, Redux zu verwenden, wurde aufgrund von Lernschwierigkeiten durch "Zustand" ersetzt, um einen reibungslosen Entwicklungsprozess sicherzustellen.
+
+Die Tests wurden als End-to-End (E2E) Tests mithilfe der Cypress-Bibliothek durchgeführt. Der Fokus lag dabei zunächst auf der Überprüfung der Kernfunktionalitäten, einschließlich der Texteingabe, Berechnung von Geschwindigkeiten und Steuerung der Animationen.
+
+Die Dokumentation wurde kontinuierlich gepflegt, wobei nach Hinzufügen neuer Funktionen entsprechende Dokumentationsabschnitte hinzugefügt wurden. Diese praxisorientierte Dokumentationsstrategie gewährleistete Transparenz und Nachvollziehbarkeit im Entwicklungsprozess.
+
+## 11. Auftragsergebnis (Soll - Ist Vergleich)
+
+### 11.1 Soll
+
+Die ursprüngliche Vision des Projekts war die Entwicklung eines textbasierten Rennspiels, das den Anforderungen des Simulationsprojekts entspricht und gleichzeitig ein unterhaltsames Spielerlebnis bietet. Die spezifischen Kriterien umfassten die Implementierung von Eingabeparametern, Zufallsparametern, verschiedenen Simulationsgeschwindigkeiten, einer Animation und einer zeitabhängigen Simulation.
+
+### 11.2 Ist
+
+Das resultierende Projekt ist ein funktionsfähiges textbasiertes Rennspiel, das erfolgreich die definierten Kriterien des Simulationsprojekts erfüllt. Die Oberfläche bietet mehr als fünf Eingabeparameter, darunter zwei Zufallsparameter in Form von Gauss'scher Normalverteilung und Normalverteilung. Drei unterschiedliche Simulationsgeschwindigkeiten (langsam, mittel, schnell) sowie eine Animation sind implementiert. Die Simulation ist zeitabhängig, und zusätzliche Elemente wie Barrieren sorgen für eine vielseitige und herausfordernde Spielerfahrung.
+
+### 11.3 Vergleich
+
+Der Vergleich zeigt eine weitgehende Übereinstimmung zwischen den ursprünglichen Zielen und dem erreichten Ergebnis. Die Funktionalitäten des Spiels erfüllen die gestellten Anforderungen und bieten darüber hinaus einen zufälligen und unterhaltsamen Aspekt durch die Implementierung von Items und Hindernissen. Die Simulation ist intuitiv und benutzerfreundlich, während die technische Umsetzung auf bewährten Technologien wie React, TypeScript und Zustand basiert.
